@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ReusApp</string>
+    <string name="create_account">crear cuenta</string>
+    <string name="login">Iniciar sesion</string>
+    <string name="menu">inicio</string>
+    <string name="how_i_recycle">como reciclo?</string>
+    <string name="reusapp_img">ReusApp img</string>
+    <string name="my_data">datos personales</string>
+    <string name="queries">consultas</string>
+    <string name="my_points">mis puntos</string>
+    <string name="rewards">recompensas</string>
+    <string name="profile">mi perfil</string>
+    <string name="logout">cerrar sesion</string>
+    <string name="xcolors">por colores</string>
+    <string name="back">regresar al inicio</string>
+    <string name="update_password">actualizar contraseña</string>
+    <string name="data_protected">proteccion de datos</string>
+    <string name="help">ayuda</string>
+</resources>

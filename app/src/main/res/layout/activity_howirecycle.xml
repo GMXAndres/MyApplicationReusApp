@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:paddingVertical="32dp"
+    tools:context=".howirecycleActivity">
+
+    <ImageView
+        android:contentDescription="@string/reusapp_img"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/reusapp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tituloInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/how_i_recycle"
+        android:textAllCaps="true"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/btnInfoColors"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/buttom"
+        android:text="@string/xcolors"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tituloInfo" />
+
+    <Button
+        android:id="@+id/btnInfoMaterials"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/buttom"
+        android:text="por materiales"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnInfoColors" />
+
+    <Button
+        android:id="@+id/btnVidReciclaje"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/buttom"
+        android:text="video!!-> por que reciclar?"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnInfoMaterials" />
+
+    <Button
+        android:id="@+id/btnRecEnCol"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/buttom"
+        android:text="Reciclaje En colombia!!"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnVidReciclaje" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

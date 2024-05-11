@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:paddingVertical="32dp"
+    tools:context=".inicioActivity">
+
+    <ImageView
+        android:contentDescription="@string/reusapp_img"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/reusapp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/titleInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/menu"
+        android:textAllCaps="true"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/btnHowIRecycle"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/buttom"
+        android:text="@string/how_i_recycle"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleInicio" />
+
+    <Button
+        android:id="@+id/btnqueries"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/buttom"
+        android:text="@string/queries"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnHowIRecycle" />
+
+    <Button
+        android:id="@+id/btnpoints"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/buttom"
+        android:text="@string/my_points"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnqueries" />
+
+    <Button
+        android:id="@+id/btnrewards"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/buttom"
+        android:text="@string/rewards"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnpoints" />
+
+    <Button
+        android:id="@+id/btnprofile"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/buttom"
+        android:text="@string/profile"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnrewards"/>
+
+    <Button
+        android:id="@+id/btnlogout"
+        android:layout_width="200dp"
+        android:layout_height="47dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="35dp"
+        android:backgroundTint="@color/buttom_back"
+        android:text="@string/logout"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnprofile" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
