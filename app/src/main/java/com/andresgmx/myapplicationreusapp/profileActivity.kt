@@ -13,12 +13,14 @@ class profileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
+        setContentView(R.layout.activity_profile)
         val actionBarHowIRec = supportActionBar
         actionBarHowIRec!!.title = "Regresar"
         actionBarHowIRec.setDisplayHomeAsUpEnabled(true)//btnPolitics
 
-        setContentView(R.layout.activity_profile)
+        val btnMyData=findViewById<Button>(R.id.btnMyData)
+        btnMyData.setOnClickListener{navigateToPersonalData()}
+
         val btnPolitics=findViewById<Button>(R.id.btnPolitics)
         btnPolitics.setOnClickListener{
             val url4="https://www.amb.gov.co/politica-de-tratamiento-de-datos-personales/"
@@ -30,6 +32,11 @@ class profileActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    private fun navigateToPersonalData() {
+        val intent=Intent(this,PersonalinfoActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onSupportNavigateUp(): Boolean {

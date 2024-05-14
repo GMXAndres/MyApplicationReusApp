@@ -3,6 +3,7 @@ package com.andresgmx.myapplicationreusapp
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -13,6 +14,10 @@ class inicioActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_inicio)
+        //muestra nombre
+        val Result= findViewById<TextView>(R.id.tvShowName)
+        val name:String =intent.extras?.getString("Extra_Name").orEmpty()
+        Result.text=name
 
         val btnHowIRecycle = findViewById<Button>(R.id.btnHowIRecycle)
         btnHowIRecycle.setOnClickListener { navigateToHowIRecycle() }
@@ -66,6 +71,7 @@ class inicioActivity : AppCompatActivity() {
 
     private fun returnToMain() {
         val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
 }

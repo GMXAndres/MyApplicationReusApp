@@ -20,14 +20,24 @@
         android:src="@drawable/reusapp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/uis"
+        android:src="@drawable/uis"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/titleProfile"
+        android:id="@+id/tvTitleProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/profile"
         android:textAllCaps="true"
         android:textSize="40sp"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +57,7 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleProfile" />
 
     <Button
         android:id="@+id/btnUpdatePass"

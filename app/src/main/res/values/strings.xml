@@ -16,4 +16,12 @@
     <string name="update_password">actualizar contraseña</string>
     <string name="data_protected">proteccion de datos</string>
     <string name="help">ayuda</string>
+    <string name="uis">Uis</string>
+    <string name="name">Nombres</string>
+    <string name="lastName">Apellidos</string>
+    <string name="identification">Cedula de ciudadania</string>
+    <string name="email">Correo</string>
+    <string name="address">Direccion</string>
+    <string name="password">Contraseña</string>
+    <string name="welcome">bienvenid@</string>
 </resources>

@@ -14,8 +14,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
         val btncreateAccount=findViewById<Button>(R.id.btncreateAccount)
-        btncreateAccount.setOnClickListener{navigateToInicio()}
+        btncreateAccount.setOnClickListener{navigateToCreateAccoun()}
 
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         btnLogin.setOnClickListener { navigateToInicio()}
@@ -26,6 +27,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+    }
+
+    private fun navigateToCreateAccoun() {
+        val intent=Intent(this, CreaCuentaActivity::class.java)
+        startActivity(intent)
     }
 
     private fun navigateToInicio(){

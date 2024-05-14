@@ -7,7 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="background">#6DADFD</color>
-    <color name="buttom">#FCBA5C</color>
-    <color name="buttom_back">#F8565C</color>
+    <color name="purple">#9331C6</color>
+    <color name="background">#6DADFD</color>//color fondo de app
+    <color name="buttom">#FCBA5C</color>//color de fondo de botones
+    <color name="buttom_back">#F8565C</color>//color de fondo de boton cerrar sesion
 </resources>

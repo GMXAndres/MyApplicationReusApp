@@ -11,66 +11,58 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:contentDescription="@string/reusapp_img"
+        android:id="@+id/ReusApp"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_marginTop="80dp"
+        android:contentDescription="@string/reusapp_img"
         android:src="@drawable/reusapp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/Create"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/uis"
+        android:src="@drawable/uis"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ReusApp" />
+
+
+    <Button
+        android:id="@+id/btncreateAccount"
+        android:layout_width="170dp"
+        android:layout_height="130dp"
+        android:backgroundTint="@color/buttom"
+        android:gravity="center"
+        android:text="@string/create_account"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/buttom"
-        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/Login"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnLogin"/>
 
-        <Button
-            android:id="@+id/btncreateAccount"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/buttom"
-            android:gravity="center"
-            android:text="@string/create_account"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/Login"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="20dp"
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="170dp"
+        android:layout_height="130dp"
         android:backgroundTint="@color/buttom"
-        app:cardCornerRadius="20dp"
+        android:gravity="center"
+        android:text="@string/login"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/Create">
-
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/buttom"
-            android:gravity="center"
-            android:text="@string/login"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintStart_toEndOf="@+id/btncreateAccount"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

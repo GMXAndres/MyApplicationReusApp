@@ -12,10 +12,11 @@
     tools:context=".rewardsActivity">
 
     <TextView
-        android:id="@+id/tituloRewards"
+        android:id="@+id/tvTituloRewards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rewards"
+        android:textColor="@color/black"
         android:textAllCaps="true"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -29,10 +30,21 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="50dp"
+        android:background="@drawable/border"
         android:layout_marginEnd="20dp"
         android:contentDescription="@string/reusapp_img"
         android:src="@drawable/reusapp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/uis"
+        android:src="@drawable/uis"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -45,16 +57,18 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/rec2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tituloRewards">
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloRewards">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1000 puntos"
+            android:textColor="@color/black"
             android:textAllCaps="true"
             android:textStyle="bold" />
 
         <ImageButton
+            android:id="@+id/ibNetflix"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
@@ -73,16 +87,18 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/rec1"
-        app:layout_constraintTop_toBottomOf="@+id/tituloRewards">
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloRewards">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1000 puntos"
+            android:textColor="@color/black"
             android:textAllCaps="true"
             android:textStyle="bold" />
 
         <ImageButton
+            android:id="@+id/ibParamount"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
@@ -106,10 +122,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="800 puntos"
+            android:textColor="@color/black"
             android:textAllCaps="true"
             android:textStyle="bold" />
 
         <ImageButton
+            android:id="@+id/ibYtPremium"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
@@ -133,10 +151,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="700 puntos"
+            android:textColor="@color/black"
             android:textAllCaps="true"
             android:textStyle="bold" />
 
         <ImageButton
+            android:id="@+id/ibJumbo"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
