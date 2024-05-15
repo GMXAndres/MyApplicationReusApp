@@ -69,10 +69,10 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etname"
             android:layout_width="300dp"
-            android:inputType="textNoSuggestions"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/black"
             android:hint="@string/name"
+            android:inputType="textNoSuggestions"
             android:maxLength="21"
             android:maxLines="1"
             android:singleLine="true"
@@ -128,8 +128,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/black"
             android:hint="@string/identification"
-            android:maxLength="25"
             android:inputType="number"
+            android:maxLength="25"
             android:maxLines="1"
             android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -156,8 +156,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/black"
             android:hint="example@gmail.com"
-            android:maxLength="25"
             android:inputType="textEmailAddress"
+            android:maxLength="25"
             android:maxLines="1"
             android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -211,22 +211,24 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/black"
             android:hint="@string/password"
-            android:maxLength="25"
             android:inputType="textPassword"
+            android:maxLength="25"
             android:maxLines="1"
             android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/btncreateAccount2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/buttom"
+            android:hapticFeedbackEnabled="true"
             android:text="@string/create_account"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/etPassword"
+            app:shapeAppearanceOverlay="@style/radius" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="50dp" /> <!-- El radio define el grado de redondez -->
+    <!-- Puedes ajustar el radio según lo que desees -->
+    <!-- Otros atributos como color, borde, etc., pueden ser añadidos aquí -->
+</shape>

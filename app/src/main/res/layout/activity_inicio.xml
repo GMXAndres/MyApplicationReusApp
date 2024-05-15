@@ -13,14 +13,16 @@
 
     <ImageView
         android:id="@+id/ivReusApp"
-        android:contentDescription="@string/reusapp_img"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
+        android:contentDescription="@string/reusapp_img"
         android:src="@drawable/reusapp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/radius" />
+
     <ImageView
         android:id="@+id/ivUis"
         android:layout_width="60dp"
@@ -52,29 +54,30 @@
         android:id="@+id/tvShowName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="User"
-        android:textAllCaps="true"
-        android:textSize="18sp"
-        android:textColor="@color/purple"
-        android:textStyle="bold"
         android:layout_marginTop="10dp"
-        app:layout_constraintStart_toEndOf="@+id/ivUis"
+        android:textAllCaps="true"
+        android:textColor="@color/purple"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/ivReusApp"
-        app:layout_constraintTop_toBottomOf="@id/tvShowWelcome" />
+        app:layout_constraintStart_toEndOf="@+id/ivUis"
+        app:layout_constraintTop_toBottomOf="@id/tvShowWelcome"
+        tools:text="User" />
+
     <TextView
         android:id="@+id/tvShowWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:text="@string/welcome"
         android:textAllCaps="true"
-        android:textSize="22sp"
         android:textColor="@color/black"
+        android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_marginTop="40dp"
-        app:layout_constraintStart_toEndOf="@+id/ivUis"
+        app:layout_constraintBottom_toTopOf="@+id/tvShowName"
         app:layout_constraintEnd_toStartOf="@+id/ivReusApp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/tvShowName"/>
+        app:layout_constraintStart_toEndOf="@+id/ivUis"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnHowIRecycle"
@@ -83,12 +86,14 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/buttom"
+        android:hapticFeedbackEnabled="true"
         android:text="@string/how_i_recycle"
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleInicio" />
+        app:layout_constraintTop_toBottomOf="@+id/titleInicio"
+        app:shapeAppearanceOverlay="@style/radius" />
 
     <Button
         android:id="@+id/btnqueries"
@@ -97,12 +102,14 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/buttom"
+        android:hapticFeedbackEnabled="true"
         android:text="@string/queries"
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnHowIRecycle" />
+        app:layout_constraintTop_toBottomOf="@+id/btnHowIRecycle"
+        app:shapeAppearanceOverlay="@style/radius" />
 
     <Button
         android:id="@+id/btnpoints"
@@ -111,12 +118,14 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/buttom"
+        android:hapticFeedbackEnabled="true"
         android:text="@string/my_points"
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnqueries" />
+        app:layout_constraintTop_toBottomOf="@+id/btnqueries"
+        app:shapeAppearanceOverlay="@style/radius" />
 
     <Button
         android:id="@+id/btnrewards"
@@ -125,12 +134,14 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/buttom"
+        android:hapticFeedbackEnabled="true"
         android:text="@string/rewards"
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnpoints" />
+        app:layout_constraintTop_toBottomOf="@+id/btnpoints"
+        app:shapeAppearanceOverlay="@style/radius" />
 
     <Button
         android:id="@+id/btnprofile"
@@ -139,12 +150,14 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/buttom"
+        android:hapticFeedbackEnabled="true"
         android:text="@string/profile"
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnrewards"/>
+        app:layout_constraintTop_toBottomOf="@+id/btnrewards"
+        app:shapeAppearanceOverlay="@style/radius" />
 
     <Button
         android:id="@+id/btnlogout"
@@ -153,6 +166,7 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="35dp"
         android:backgroundTint="@color/buttom_back"
+        android:hapticFeedbackEnabled="true"
         android:text="@string/logout"
         android:textAllCaps="true"
         android:textColor="@color/black"

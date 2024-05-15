@@ -12,14 +12,15 @@
     tools:context=".ConsultasActivity">
 
     <ImageView
-        android:contentDescription="@string/reusapp_img"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
+        android:contentDescription="@string/reusapp_img"
         android:src="@drawable/reusapp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -36,9 +37,9 @@
         android:layout_height="wrap_content"
         android:text="@string/queries"
         android:textAllCaps="true"
+        android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,12 +53,14 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/buttom"
+        android:hapticFeedbackEnabled="true"
         android:text="Horarios y rutas"
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTituloConsult" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTituloConsult"
+        app:shapeAppearanceOverlay="@style/radius" />
 
     <Button
         android:id="@+id/btnHistorial"
@@ -66,12 +69,14 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/buttom"
+        android:hapticFeedbackEnabled="true"
         android:text="Historial"
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnHorario" />
+        app:layout_constraintTop_toBottomOf="@+id/btnHorario"
+        app:shapeAppearanceOverlay="@style/radius" />
 
     <Button
         android:id="@+id/btnEstadis"
@@ -80,12 +85,14 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/buttom"
+        android:hapticFeedbackEnabled="true"
         android:text="estadisticas"
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnHistorial" />
+        app:layout_constraintTop_toBottomOf="@+id/btnHistorial"
+        app:shapeAppearanceOverlay="@style/radius" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@
     android:paddingVertical="32dp"
     tools:context=".MainActivity">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ReusApp"
         android:layout_width="250dp"
         android:layout_height="250dp"
@@ -19,7 +19,8 @@
         android:src="@drawable/reusapp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/radius" />
 
     <ImageView
         android:layout_width="100dp"
@@ -37,17 +38,19 @@
         android:id="@+id/btncreateAccount"
         android:layout_width="170dp"
         android:layout_height="130dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="@color/buttom"
         android:gravity="center"
+        android:hapticFeedbackEnabled="true"
         android:text="@string/create_account"
         android:textAllCaps="true"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnLogin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnLogin"/>
+        app:shapeAppearanceOverlay="@style/radius" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -55,6 +58,7 @@
         android:layout_height="130dp"
         android:backgroundTint="@color/buttom"
         android:gravity="center"
+        android:hapticFeedbackEnabled="true"
         android:text="@string/login"
         android:textAllCaps="true"
         android:textColor="@color/black"
@@ -62,7 +66,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btncreateAccount"/>
+        app:layout_constraintStart_toEndOf="@+id/btncreateAccount"
+        app:shapeAppearanceOverlay="@style/radius" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

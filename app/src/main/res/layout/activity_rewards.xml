@@ -16,8 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rewards"
-        android:textColor="@color/black"
         android:textAllCaps="true"
+        android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,8 +30,8 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="50dp"
-        android:background="@drawable/border"
         android:layout_marginEnd="20dp"
+        android:background="@drawable/border"
         android:contentDescription="@string/reusapp_img"
         android:src="@drawable/reusapp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,8 +63,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1000 puntos"
-            android:textColor="@color/black"
             android:textAllCaps="true"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <ImageButton
@@ -72,6 +72,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
+            android:hapticFeedbackEnabled="true"
             android:scaleType="centerCrop"
             android:src="@drawable/netflixsymbol" />
 
@@ -93,8 +94,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1000 puntos"
-            android:textColor="@color/black"
             android:textAllCaps="true"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <ImageButton
@@ -102,6 +103,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
+            android:hapticFeedbackEnabled="true"
             android:scaleType="centerCrop"
             android:src="@drawable/paramount2" />
 
@@ -122,8 +124,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="800 puntos"
-            android:textColor="@color/black"
             android:textAllCaps="true"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <ImageButton
@@ -131,6 +133,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
+            android:hapticFeedbackEnabled="true"
             android:scaleType="centerCrop"
             android:src="@drawable/youtubepremium" />
 
@@ -151,8 +154,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="700 puntos"
-            android:textColor="@color/black"
             android:textAllCaps="true"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <ImageButton
@@ -160,6 +163,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
+            android:hapticFeedbackEnabled="true"
             android:scaleType="centerCrop"
             android:src="@drawable/jumbo" />
 

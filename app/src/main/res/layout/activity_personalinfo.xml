@@ -10,16 +10,18 @@
     android:padding="16dp"
     android:paddingVertical="32dp"
     tools:context=".PersonalInfoActivity">
+
     <ImageView
         android:id="@+id/ivReusApp"
-        android:contentDescription="@string/reusapp_img"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
+        android:contentDescription="@string/reusapp_img"
         android:src="@drawable/reusapp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/ivUis"
         android:layout_width="60dp"
@@ -30,6 +32,7 @@
         android:src="@drawable/uis"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tvTitlePersonalInfo"
         android:layout_width="wrap_content"
@@ -44,11 +47,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.2" />
+
     <TextView
         android:id="@+id/tvShowNameInPD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Ejemplo nombre"
         android:textAllCaps="true"
         android:textColor="@color/black"
         android:textSize="35sp"
@@ -56,6 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitlePersonalInfo"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.2"
+        tools:text="Ejemplo nombre" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

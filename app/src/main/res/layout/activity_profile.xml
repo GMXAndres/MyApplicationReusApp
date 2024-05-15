@@ -20,6 +20,7 @@
         android:src="@drawable/reusapp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -36,14 +37,14 @@
         android:layout_height="wrap_content"
         android:text="@string/profile"
         android:textAllCaps="true"
-        android:textSize="40sp"
         android:textColor="@color/black"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintVertical_bias="0.2" />
 
     <Button
         android:id="@+id/btnMyData"
@@ -52,12 +53,14 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/buttom"
+        android:hapticFeedbackEnabled="true"
         android:text="@string/my_data"
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitleProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleProfile"
+        app:shapeAppearanceOverlay="@style/radius" />
 
     <Button
         android:id="@+id/btnUpdatePass"
@@ -66,12 +69,14 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/buttom"
+        android:hapticFeedbackEnabled="true"
         android:text="@string/update_password"
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMyData" />
+        app:layout_constraintTop_toBottomOf="@+id/btnMyData"
+        app:shapeAppearanceOverlay="@style/radius" />
 
     <Button
         android:id="@+id/btnPolitics"
@@ -80,12 +85,14 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/buttom"
+        android:hapticFeedbackEnabled="true"
         android:text="@string/data_protected"
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnUpdatePass" />
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdatePass"
+        app:shapeAppearanceOverlay="@style/radius" />
 
     <Button
         android:id="@+id/btnHelp"
@@ -94,15 +101,14 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/buttom"
+        android:hapticFeedbackEnabled="true"
         android:text="@string/help"
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPolitics" />
-
-
-
+        app:layout_constraintTop_toBottomOf="@+id/btnPolitics"
+        app:shapeAppearanceOverlay="@style/radius" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
