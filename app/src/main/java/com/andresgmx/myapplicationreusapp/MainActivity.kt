@@ -8,36 +8,34 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-
 class MainActivity : AppCompatActivity() {
+    private lateinit var btncreateAccount: Button
+    private lateinit var btnLogin: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-
-        val btncreateAccount=findViewById<Button>(R.id.btncreateAccount)
-        btncreateAccount.setOnClickListener{navigateToCreateAccoun()}
-
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
-        btnLogin.setOnClickListener { navigateToInicio()}
-
+        initcomponents()
+        initListener()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
     }
 
-    private fun navigateToCreateAccoun() {
-        val intent=Intent(this, CreaCuentaActivity::class.java)
+    private fun initListener() {
+        btncreateAccount.setOnClickListener { navigateTo(CreaCuentaActivity::class.java) }
+        btnLogin.setOnClickListener { navigateTo(InicioActivity::class.java) }
+    }
+
+    private fun navigateTo(activityClass: Class<*>) {
+        val intent = Intent(this, activityClass)
         startActivity(intent)
     }
 
-    private fun navigateToInicio(){
-        val intent=Intent(this,inicioActivity::class.java)
-        startActivity(intent)
-
+    private fun initcomponents() {
+        btncreateAccount = findViewById(R.id.btncreateAccount)
+        btnLogin = findViewById(R.id.btnLogin)
     }
-
 }

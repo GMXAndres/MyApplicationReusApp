@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:paddingVertical="32dp"
-    tools:context=".consultasActivity">
+    tools:context=".ConsultasActivity">
 
     <ImageView
         android:contentDescription="@string/reusapp_img"

@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:paddingVertical="32dp"
-    tools:context=".inicioActivity">
+    tools:context=".InicioActivity">
 
     <ImageView
         android:id="@+id/ivReusApp"
@@ -52,7 +52,7 @@
         android:id="@+id/tvShowName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="New User"
+        tools:text="User"
         android:textAllCaps="true"
         android:textSize="18sp"
         android:textColor="@color/purple"
@@ -70,7 +70,7 @@
         android:textSize="22sp"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintStart_toEndOf="@+id/ivUis"
         app:layout_constraintEnd_toStartOf="@+id/ivReusApp"
         app:layout_constraintTop_toTopOf="parent"

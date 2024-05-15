@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:paddingVertical="32dp"
-    tools:context=".howirecycleActivity">
+    tools:context=".HowirecycleActivity">
 
     <ImageView
         android:contentDescription="@string/reusapp_img"

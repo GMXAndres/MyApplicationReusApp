@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:paddingVertical="32dp"
-    tools:context=".rewardsActivity">
+    tools:context=".RewardsActivity">
 
     <TextView
         android:id="@+id/tvTituloRewards"

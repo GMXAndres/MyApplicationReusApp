@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:paddingVertical="32dp"
-    tools:context=".PersonalinfoActivity">
+    tools:context=".PersonalInfoActivity">
     <ImageView
         android:id="@+id/ivReusApp"
         android:contentDescription="@string/reusapp_img"

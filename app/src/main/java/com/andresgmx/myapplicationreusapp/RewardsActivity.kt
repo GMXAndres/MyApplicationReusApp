@@ -6,16 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class rewardsActivity : AppCompatActivity() {
+class RewardsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_rewards)
-
-        val actionBarRewards=supportActionBar
-        actionBarRewards!!.title="Regresar"
-        actionBarRewards.setDisplayHomeAsUpEnabled(true)
-
+        setupActionBar()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -23,8 +19,16 @@ class rewardsActivity : AppCompatActivity() {
             insets
         }
     }
+
+    private fun setupActionBar() {
+        supportActionBar?.apply {
+            title = "Regresar"
+            setDisplayHomeAsUpEnabled(true)
+        }
+    }
+
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 }

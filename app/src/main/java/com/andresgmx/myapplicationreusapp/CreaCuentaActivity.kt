@@ -2,7 +2,6 @@ package com.andresgmx.myapplicationreusapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -12,42 +11,21 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class CreaCuentaActivity : AppCompatActivity() {
+    private lateinit var btncreateAccount2: AppCompatButton
+    private lateinit var etname: AppCompatEditText
+    private lateinit var etLastName: AppCompatEditText
+    private lateinit var etIdentification: AppCompatEditText
+    private lateinit var etEmail: AppCompatEditText
+    private lateinit var etAddress: AppCompatEditText
+    private lateinit var etPassword: AppCompatEditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_crea_cuenta)
-        val actionBarHowIRec = supportActionBar
-        actionBarHowIRec!!.title = "Regresar"
-        actionBarHowIRec.setDisplayHomeAsUpEnabled(true)
 
-        val btncreateAccount2 = findViewById<AppCompatButton>(R.id.btncreateAccount2)
-
-
-        val etname = findViewById<AppCompatEditText>(R.id.etname)
-        val etLastName = findViewById<AppCompatEditText>(R.id.etLastName)
-        val etIdentification = findViewById<AppCompatEditText>(R.id.etIdentification)
-        val etEmail = findViewById<AppCompatEditText>(R.id.etEmail)
-        val etAddress=findViewById<AppCompatEditText>(R.id.etAddress)
-        val etPassword=findViewById<AppCompatEditText>(R.id.etPassword)
-
-        btncreateAccount2.setOnClickListener {
-            val name = etname.text.toString()//extrae el texto ingresado y lo convierte a cadena String
-            val lastName = etLastName.text.toString()//extrae el texto ingresado y lo convierte a cadena String
-            val identification = etIdentification.text.toString()//extrae el texto ingresado y lo convierte a cadena String
-            val email = etEmail.text.toString()//extrae el texto ingresado y lo convierte a cadena String
-            val address=etAddress.text.toString()//extrae el texto ingresado y lo convierte a cadena String
-            val password=etPassword.text.toString()//extrae el texto ingresado y lo convierte a cadena String
-
-            if (name.isNotEmpty() && lastName.isNotEmpty() && identification.isNotEmpty() && email.isNotEmpty() && address.isNotEmpty() && password.isNotEmpty()) {//este if verifica si los espacios de crear usuario estan vacios, si estan vacios no continua
-                val intent = Intent(this, inicioActivity::class.java)
-                intent.putExtra("Extra_Name", name)// este bloque guarda el nombre de usuario
-                startActivity(intent)
-            } else Toast.makeText(
-                getApplicationContext(),
-                "Todos los campos son obligatorios",
-                Toast.LENGTH_SHORT
-            ).show();
-        }//Muestra mensaje de error si falta alguno de los datos del if
+        initcomponents()
+        initListeners()
+        setupActionBar()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -56,8 +34,63 @@ class CreaCuentaActivity : AppCompatActivity() {
         }
     }
 
+    private fun initListeners() {
+        btncreateAccount2.setOnClickListener {
+            val name =
+                etname.text.toString()//extrae el texto ingresado y lo convierte a cadena String
+            val lastName =
+                etLastName.text.toString()//extrae el texto ingresado y lo convierte a cadena String
+            val identification =
+                etIdentification.text.toString()//extrae el texto ingresado y lo convierte a cadena String
+            val email =
+                etEmail.text.toString()//extrae el texto ingresado y lo convierte a cadena String
+            val address =
+                etAddress.text.toString()//extrae el texto ingresado y lo convierte a cadena String
+            val password =
+                etPassword.text.toString()//extrae el texto ingresado y lo convierte a cadena String
+
+            if (areFieldsValid(name, lastName, identification, email, address, password)) {
+                navigateToInicioActivity(name)
+            } else {
+                showToast(getString(R.string.necessary_data))
+            }
+        }
+    }
+
+    private fun areFieldsValid(vararg fields: String): Boolean {
+        return fields.all { it.isNotEmpty() }
+    }
+
+    private fun navigateToInicioActivity(name: String) {
+        val intent = Intent(this, InicioActivity::class.java).apply {
+            putExtra("Extra_Name", name)
+        }
+        startActivity(intent)
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setupActionBar() {
+        supportActionBar?.apply {
+            title = "Regresar"
+            setDisplayHomeAsUpEnabled(true)
+        }
+    }
+
+    private fun initcomponents() {
+        btncreateAccount2 = findViewById(R.id.btncreateAccount2)
+        etname = findViewById(R.id.etname)
+        etLastName = findViewById(R.id.etLastName)
+        etIdentification = findViewById(R.id.etIdentification)
+        etEmail = findViewById(R.id.etEmail)
+        etAddress = findViewById(R.id.etAddress)
+        etPassword = findViewById(R.id.etPassword)
+    }
+
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 }

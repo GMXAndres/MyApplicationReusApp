@@ -13,28 +13,28 @@
         android:theme="@style/Theme.MyApplicationReusApp"
         tools:targetApi="31">
         <activity
-            android:name=".PersonalinfoActivity"
+            android:name=".PersonalInfoActivity"
             android:exported="false" />
         <activity
             android:name=".CreaCuentaActivity"
             android:exported="false" />
         <activity
-            android:name=".profileActivity"
+            android:name=".ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".rewardsActivity"
+            android:name=".RewardsActivity"
             android:exported="false" />
         <activity
-            android:name=".pointsActivity"
+            android:name=".PointsActivity"
             android:exported="false" />
         <activity
-            android:name=".consultasActivity"
+            android:name=".ConsultasActivity"
             android:exported="false" />
         <activity
-            android:name=".howirecycleActivity"
+            android:name=".HowirecycleActivity"
             android:exported="false" />
         <activity
-            android:name=".inicioActivity"
+            android:name=".InicioActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
