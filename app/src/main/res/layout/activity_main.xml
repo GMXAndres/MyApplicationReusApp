@@ -23,15 +23,31 @@
         app:shapeAppearanceOverlay="@style/radius" />
 
     <ImageView
+        android:id="@+id/ivMainUis"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
         android:contentDescription="@string/uis"
         android:src="@drawable/uis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ReusApp" />
+
+    <Button
+        android:id="@+id/btnPrueba"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/buttom"
+        android:gravity="center"
+        android:text="@string/prueba"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivMainUis"
+        app:shapeAppearanceOverlay="@style/radius" />
 
 
     <Button
@@ -41,7 +57,6 @@
         android:layout_marginEnd="20dp"
         android:backgroundTint="@color/buttom"
         android:gravity="center"
-        android:hapticFeedbackEnabled="true"
         android:text="@string/create_account"
         android:textAllCaps="true"
         android:textColor="@color/black"
@@ -58,7 +73,6 @@
         android:layout_height="130dp"
         android:backgroundTint="@color/buttom"
         android:gravity="center"
-        android:hapticFeedbackEnabled="true"
         android:text="@string/login"
         android:textAllCaps="true"
         android:textColor="@color/black"

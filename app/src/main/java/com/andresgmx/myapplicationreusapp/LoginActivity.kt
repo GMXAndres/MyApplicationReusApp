@@ -8,21 +8,26 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var btncreateAccount: Button
-    private lateinit var btnLogin: Button
-    private lateinit var btnPrueba: Button
+class LoginActivity : AppCompatActivity() {
+    private lateinit var etEmailLogin: AppCompatEditText
+    private lateinit var etPassLogin: AppCompatEditText
+    private lateinit var btnLogin2: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        initcomponents()
-        initListener()
+        setContentView(R.layout.activity_login)
+        setupActionBar()
+        initComponents()
+        initListeners()
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -30,18 +35,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initListener() {
-        btncreateAccount.setOnClickListener {
-            navigateTo(CreaCuentaActivity::class.java)
+    private fun initListeners() {
+        btnLogin2.setOnClickListener {
             vibratePhone()
+            val email = etEmailLogin.text.toString()
+            val pass = etPassLogin.text.toString()
+            if (areFieldsValid(email, pass)) {
+                navigateTo(InicioActivity::class.java)
+            } else {
+                showToast(getString(R.string.necessary_data))
+            }
         }
-        btnLogin.setOnClickListener {
-            navigateTo(LoginActivity::class.java)
-            vibratePhone()
-        }
-        btnPrueba.setOnClickListener{navigateTo(InicioActivity::class.java)
-            vibratePhone()}
-
     }
 
     private fun navigateTo(activityClass: Class<*>) {
@@ -49,10 +53,30 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun initcomponents() {
-        btncreateAccount = findViewById(R.id.btncreateAccount)
-        btnLogin = findViewById(R.id.btnLogin)
-        btnPrueba = findViewById(R.id.btnPrueba)
+    private fun areFieldsValid(vararg fields: String): Boolean {
+        return fields.all { it.isNotEmpty() }
+    }
+
+    private fun initComponents() {
+        etEmailLogin = findViewById(R.id.etEmailLogin)
+        etPassLogin = findViewById(R.id.etPassLogin)
+        btnLogin2 = findViewById(R.id.btnLogin2)
+    }
+
+    private fun setupActionBar() {
+        supportActionBar?.apply {
+            title = "Pagina Principal"
+            setDisplayHomeAsUpEnabled(true)
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun vibratePhone() {

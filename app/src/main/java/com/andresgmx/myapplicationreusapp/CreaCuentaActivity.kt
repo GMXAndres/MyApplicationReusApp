@@ -1,5 +1,6 @@
 package com.andresgmx.myapplicationreusapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.doAfterTextChanged
 
 class CreaCuentaActivity : AppCompatActivity() {
     private lateinit var btncreateAccount2: Button
@@ -19,6 +21,7 @@ class CreaCuentaActivity : AppCompatActivity() {
     private lateinit var etEmail: AppCompatEditText
     private lateinit var etAddress: AppCompatEditText
     private lateinit var etPassword: AppCompatEditText
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,6 +30,15 @@ class CreaCuentaActivity : AppCompatActivity() {
         initcomponents()
         initListeners()
         setupActionBar()
+        etLastName.doAfterTextChanged { text ->
+            if (text.isNullOrEmpty()) {
+                etLastName.setBackgroundColor(getColor(R.color.etEmpty)) // Cambia a rojo si el texto está vacío o nulo
+            } else {
+                etLastName.setBackgroundColor(getColor(R.color.etok)) // Cambia a verde si hay texto en el EditText
+            }
+        }
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -34,6 +46,8 @@ class CreaCuentaActivity : AppCompatActivity() {
             insets
         }
     }
+
+
 
     private fun initListeners() {
         btncreateAccount2.setOnClickListener {
@@ -75,7 +89,7 @@ class CreaCuentaActivity : AppCompatActivity() {
 
     private fun setupActionBar() {
         supportActionBar?.apply {
-            title = "Regresar"
+            title = "Pagina Principal"
             setDisplayHomeAsUpEnabled(true)
         }
     }
