@@ -75,10 +75,10 @@
                 android:layout_height="48dp"
                 android:backgroundTint="@color/black"
                 android:hint="@string/name"
-                android:inputType="textNoSuggestions"
                 android:maxLength="21"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColorHint="@color/etEmpty" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -94,12 +94,34 @@
                 android:id="@+id/etLastName"
                 android:layout_width="300dp"
                 android:layout_height="48dp"
-                android:backgroundTintMode="add"
+                android:backgroundTint="@color/black"
                 android:hint="@string/lastName"
                 android:inputType="text"
                 android:maxLength="25"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColorHint="@color/etEmpty" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/password"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etPassword"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
+                android:backgroundTint="@color/black"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:maxLength="25"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColorHint="@color/etEmpty" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -120,7 +142,8 @@
                 android:inputType="number"
                 android:maxLength="25"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColorHint="@color/etEmpty" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -137,11 +160,12 @@
                 android:layout_width="300dp"
                 android:layout_height="48dp"
                 android:backgroundTint="@color/black"
-                android:hint="example@gmail.com"
+                android:hint="@string/exampleEmail"
                 android:inputType="textEmailAddress"
                 android:maxLength="25"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColorHint="@color/etEmpty" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -161,28 +185,8 @@
                 android:hint="@string/address"
                 android:maxLength="25"
                 android:maxLines="1"
-                android:singleLine="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/password"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/etPassword"
-                android:layout_width="300dp"
-                android:layout_height="48dp"
-                android:backgroundTint="@color/black"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:maxLength="25"
-                android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColorHint="@color/etEmpty" />
 
             <Button
                 android:id="@+id/btncreateAccount2"
@@ -190,8 +194,8 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/buttom"
                 android:hapticFeedbackEnabled="true"
-                android:textColor="@color/black"
-                android:text="@string/create_account" />
+                android:text="@string/create_account"
+                android:textColor="@color/black" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

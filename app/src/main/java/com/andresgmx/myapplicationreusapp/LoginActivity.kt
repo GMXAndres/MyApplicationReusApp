@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Patterns
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -33,6 +36,20 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        etEmailLogin.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val email = s.toString()
+                if (isValidEmail(email)) {
+                    etEmailLogin.error = null
+                } else {
+                    etEmailLogin.error = "Dirección de correo invalida"
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
     }
 
     private fun initListeners() {
@@ -40,8 +57,10 @@ class LoginActivity : AppCompatActivity() {
             vibratePhone()
             val email = etEmailLogin.text.toString()
             val pass = etPassLogin.text.toString()
-            if (areFieldsValid(email, pass)) {
+            if (areFieldsValid(email, pass) && etEmailLogin.error == null) {
                 navigateTo(InicioActivity::class.java)
+            }else if (areFieldsValid(email, pass)){
+                showToast(getString(R.string.emailInvalid))
             } else {
                 showToast(getString(R.string.necessary_data))
             }
@@ -95,5 +114,8 @@ class LoginActivity : AppCompatActivity() {
                 VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE)
             vibrator.vibrate(vibrationEffect)
         }
+    }
+    private fun isValidEmail(email: String): Boolean {
+        return email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 }

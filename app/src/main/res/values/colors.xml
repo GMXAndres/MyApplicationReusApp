@@ -13,8 +13,8 @@
     <color name="reusa">#89C400</color>
     <color name="buttom">#FCBA5C</color>//color de fondo de botones
     <color name="buttom_back">#F8565C</color>//color de fondo de boton cerrar sesion
-    <color name="etok">#CDFB98</color>//color fondo de EditText   #89c400
-    <color name="etEmpty">#FF868B</color>
+    <color name="etok">#53CC58</color>//color fondo de EditText   #89c400
+    <color name="etEmpty">#F80B15</color>
     <!--  anteriores colores
     boton  #FCBA5C-->
 </resources>

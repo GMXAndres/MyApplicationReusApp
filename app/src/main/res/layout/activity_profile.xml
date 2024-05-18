@@ -49,7 +49,7 @@
     <Button
         android:id="@+id/btnMyData"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/buttom"
@@ -65,7 +65,7 @@
     <Button
         android:id="@+id/btnUpdatePass"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/buttom"
@@ -81,7 +81,7 @@
     <Button
         android:id="@+id/btnPolitics"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/buttom"
@@ -97,7 +97,7 @@
     <Button
         android:id="@+id/btnHelp"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/buttom"

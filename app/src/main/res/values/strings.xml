@@ -26,5 +26,10 @@
     <string name="password">Contraseña</string>
     <string name="welcome">bienvenid@</string>
     <string name="necessary_data">Todos los datos son necesarios</string>
+    <string name="exampleEmail">micorreo@example.com</string>
+    <string name="emailInvalid">Correo invalido</string>
+    <string name="passInvalid">Contraseña invalida</string>
+    <string name="currentPass">Contraseña actual</string>
+    <string name="newPass">Nueva contraseña</string>
     <!--  -->
 </resources>

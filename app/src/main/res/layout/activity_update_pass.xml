@@ -9,13 +9,13 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:paddingVertical="32dp"
-    tools:context=".LoginActivity">
+    tools:context=".UpdatePassActivity">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/ReusApp"
-        android:layout_width="230dp"
-        android:layout_height="230dp"
-        android:layout_marginTop="80dp"
+        android:id="@+id/ReusAppUpdatePass"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="50dp"
         android:contentDescription="@string/reusapp_img"
         android:src="@drawable/reusapp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,23 +29,32 @@
         android:gravity="center|top"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ReusApp">
+        app:layout_constraintTop_toBottomOf="@+id/ReusAppUpdatePass">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textAllCaps="true"
+            android:text="@string/update_password"
+            android:textColor="@color/black"
+            android:textSize="28sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="@string/email"
+            android:text="@string/currentPass"
             android:textColor="@color/black"
-            android:textSize="40sp" />
+            android:textSize="25sp" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etEmailLogin"
+            android:id="@+id/etCurrentPass"
             android:layout_width="300dp"
             android:layout_height="48dp"
             android:autofillHints="emailAddress"
             android:backgroundTint="@color/black"
-            android:hint="@string/exampleEmail"
+            android:hint="@string/currentPass"
             android:maxLength="21"
             android:maxLines="1"
             android:singleLine="true"
@@ -54,13 +63,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="@string/password"
+            android:layout_marginTop="30dp"
+            android:text="@string/newPass"
             android:textColor="@color/black"
-            android:textSize="40sp" />
+            android:textSize="25sp" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etPassLogin"
+            android:id="@+id/etNewPass"
             android:layout_width="300dp"
             android:layout_height="48dp"
             android:autofillHints="emailAddress"
@@ -73,13 +82,13 @@
             android:textColorHint="@color/etEmpty" />
 
         <Button
-            android:id="@+id/btnLogin2"
+            android:id="@+id/btnUpdatePass"
             android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/buttom"
             android:contentDescription="@string/uis"
-            android:text="@string/login"
+            android:text="@string/update_password"
             android:textColor="@color/black" />
     </LinearLayout>
 

@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 class ProfileActivity : AppCompatActivity() {
     private lateinit var btnMyData: Button
     private lateinit var btnPolitics: Button
+    private lateinit var btnUpdatePass:Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,6 +32,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun initListeners() {
         btnMyData.setOnClickListener{navigateTo(PersonalInfoActivity::class.java)}
         btnPolitics.setOnClickListener { navigateToUrl("https://www.amb.gov.co/politica-de-tratamiento-de-datos-personales/") }
+        btnUpdatePass.setOnClickListener{navigateTo(UpdatePassActivity::class.java)}
     }
 
     private fun navigateToUrl(url: String) {
@@ -46,6 +48,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun initComponents() {
         btnMyData = findViewById(R.id.btnMyData)
         btnPolitics = findViewById(R.id.btnPolitics)
+        btnUpdatePass=findViewById(R.id.btnUpdatePass)
     }
 
     private fun setupActionBar() {
