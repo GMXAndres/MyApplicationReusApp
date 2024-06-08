@@ -31,5 +31,6 @@
     <string name="passInvalid">Contraseña invalida</string>
     <string name="currentPass">Contraseña actual</string>
     <string name="newPass">Nueva contraseña</string>
+    <string name="exit">Salir</string>
     <!--  -->
 </resources>

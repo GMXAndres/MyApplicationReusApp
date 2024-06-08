@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat
 class InicioActivity : AppCompatActivity() {
     private lateinit var btnHowIRecycle: Button
     private lateinit var btnqueries: Button
-    private lateinit var btnlogout: Button
+    private lateinit var btnExit: Button
     private lateinit var btnrewards: Button
     private lateinit var btnpoints: Button
     private lateinit var btnprofile: Button
@@ -47,7 +47,7 @@ class InicioActivity : AppCompatActivity() {
         btnrewards.setOnClickListener { navigateTo(RewardsActivity::class.java) }
         btnpoints.setOnClickListener { navigateTo(PointsActivity::class.java) }
         btnprofile.setOnClickListener { navigateTo(ProfileActivity::class.java) }
-        btnlogout.setOnClickListener { returnToMain() }
+        btnExit.setOnClickListener { finishAffinity() }
     }
 
     private fun navigateTo(activityClass: Class<*>) {
@@ -58,17 +58,13 @@ class InicioActivity : AppCompatActivity() {
     private fun initcomponents() {
         btnHowIRecycle = findViewById(R.id.btnHowIRecycle)
         btnqueries = findViewById(R.id.btnqueries)
-        btnlogout = findViewById(R.id.btnlogout)
+        btnExit = findViewById(R.id.btnExit)
         btnrewards = findViewById(R.id.btnrewards)
         btnpoints = findViewById(R.id.btnpoints)
         btnprofile = findViewById(R.id.btnprofile)
     }
 
-    private fun returnToMain() {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-    }
+
 
     companion object {
         const val EXTRA_NAME = "Extra_Name"

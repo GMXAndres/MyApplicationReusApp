@@ -109,6 +109,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnPolitics"
         app:shapeAppearanceOverlay="@style/radius" />
+    <Button
+        android:id="@+id/btnlogout"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="35dp"
+        android:backgroundTint="@color/buttom_back"
+        android:hapticFeedbackEnabled="true"
+        android:text="@string/logout"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnHelp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

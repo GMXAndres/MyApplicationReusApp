@@ -82,7 +82,7 @@
     <Button
         android:id="@+id/btnHowIRecycle"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/buttom"
@@ -98,7 +98,7 @@
     <Button
         android:id="@+id/btnqueries"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/buttom"
@@ -114,7 +114,7 @@
     <Button
         android:id="@+id/btnpoints"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/buttom"
@@ -130,7 +130,7 @@
     <Button
         android:id="@+id/btnrewards"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/buttom"
@@ -146,7 +146,7 @@
     <Button
         android:id="@+id/btnprofile"
         android:layout_width="match_parent"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/buttom"
@@ -160,14 +160,14 @@
         app:shapeAppearanceOverlay="@style/radius" />
 
     <Button
-        android:id="@+id/btnlogout"
+        android:id="@+id/btnExit"
         android:layout_width="200dp"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="35dp"
         android:backgroundTint="@color/buttom_back"
         android:hapticFeedbackEnabled="true"
-        android:text="@string/logout"
+        android:text="@string/exit"
         android:textAllCaps="true"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"

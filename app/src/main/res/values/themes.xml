@@ -40,4 +40,11 @@
         <item name="android:statusBarColor">@color/background</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/purple</item>>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/reusapp</item>>
+        <item name="windowSplashScreenAnimationDuration">300</item>>
+        <item name="postSplashScreenTheme">@style/Theme.MyApplicationReusApp</item>>
+    </style>
 </resources>
