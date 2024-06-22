@@ -7,7 +7,7 @@ public class Direccion(
     var complemento: String,
     var barrio: String,
     var comuna: String,
-    var codigoPostal: Int ,
+    var codigoPostal: String,
 ){
 
 }

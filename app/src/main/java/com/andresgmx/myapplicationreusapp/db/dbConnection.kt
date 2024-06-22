@@ -1,4 +1,4 @@
-package com.andresgmx.myapplicationreusapp.db
+/*package com.andresgmx.myapplicationreusapp.db
 import com.andresgmx.myapplicationreusapp.db.models.*
 import android.content.ContentValues
 import android.content.Context
@@ -112,3 +112,4 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME,nu
     }
 
 }
+*/

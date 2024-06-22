@@ -8,9 +8,10 @@ class Cuenta(
     var correo: String,
     var usuario: Usuario,
 ) {
-    fun actualizarNombre(nuevoNombre: String) {
+
+    /*fun actualizarNombre(nuevoNombre: String) {
         nombre = nuevoNombre
-    }
+    }*/
 
     companion object {
 
@@ -59,4 +60,14 @@ class Cuenta(
         val hashedInput = hashPassword(passwordInput)
         return hashedInput == hashedPassword
     }
+
+
+    fun updatePassword(newPassword: String): Boolean {
+        if (verificarSeguridadContrasena(newPassword)) {
+            hashedPassword = hashPassword(newPassword)
+            return true
+        }
+        return false
+    }
+
 }
