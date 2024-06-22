@@ -1,5 +1,5 @@
 package com.andresgmx.myapplicationreusapp.db
-
+import com.andresgmx.myapplicationreusapp.db.models.*
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -48,8 +48,8 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME,nu
         db.close()
         return id
     }
-    fun getAllUsers(): List<ModelUser> {
-        val users = ArrayList<ModelUser>()
+    fun getAllUsers(): List<Usuario> {
+        val users = ArrayList<Usuario>()
         val db = this.readableDatabase
         val cursor = db.rawQuery("SELECT nombre, apellido, puntos FROM usuario", null)
         if (cursor.moveToFirst()) {
@@ -57,7 +57,7 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context,DATABASE_NAME,nu
                 val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"))
                 val apellido = cursor.getString(cursor.getColumnIndexOrThrow("apellido"))
                 val puntos = cursor.getInt(cursor.getColumnIndexOrThrow("puntos"))
-                users.add(ModelUser(nombre, apellido, puntos))
+                users.add(Usuario(nombre, apellido, puntos))
             } while (cursor.moveToNext())
         }
         cursor.close()
