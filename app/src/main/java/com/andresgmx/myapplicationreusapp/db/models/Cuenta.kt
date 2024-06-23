@@ -4,9 +4,9 @@ import java.util.Base64
 
 class Cuenta(
     var nombre: String,
-    private var hashedPassword: String,
+    var hashedPassword: String,
     var correo: String,
-    var usuario: Usuario,
+    var usuario: Usuario?=null,
 ) {
 
     /*fun actualizarNombre(nuevoNombre: String) {
@@ -18,10 +18,15 @@ class Cuenta(
 
         private const val SALT = "vhfdwjvnc"
         fun hashPassword(password: String): String {
-            val saltedPassword = "$SALT$password"
-            val sha256 = MessageDigest.getInstance("SHA-256")
-            val hashBytes = sha256.digest(saltedPassword.toByteArray())
-            return Base64.getEncoder().encodeToString(hashBytes)
+            if (verificarSeguridadContrasena(password)) {
+                val saltedPassword = "$SALT$password"
+                val sha256 = MessageDigest.getInstance("SHA-256")
+                val hashBytes = sha256.digest(saltedPassword.toByteArray())
+                return Base64.getEncoder().encodeToString(hashBytes)
+            }
+            else{
+                throw IllegalArgumentException("La contraseña no cumple con los requisitos")
+            }
         }
         fun verificarSeguridadContrasena(password: String): Boolean {
             // Verificar longitud mínima
@@ -48,8 +53,6 @@ class Cuenta(
             if (!contieneMayuscula || !contieneMinuscula) {
                 return false
             }
-
-            //Cumple con los requisitos entonces
             return true
         }
 

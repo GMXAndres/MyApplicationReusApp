@@ -1,5 +1,6 @@
 package com.andresgmx.myapplicationreusapp.db.models;
 import com.andresgmx.myapplicationreusapp.db.models.enums.TipoMaterial;
+import java.time.LocalDate
 
 import java.util.Date
 
@@ -8,13 +9,17 @@ class Usuario (
     var apellido: String,
     var cedula: String,
     var telefono: String,
-    var fechaRegistro: Date,
-    var cuenta: Cuenta,
-    var direccion: Direccion,
-    var puntos: Puntos,
+    var fechaNacimiento: LocalDate,
+    var fechaRegistro: LocalDate,
+    var cuenta: Cuenta? = null,
+    var direccion: Direccion?=null,
+    var puntos: Puntos?=null,
     val reciclajes: MutableList<Reciclaje> = mutableListOf(),
 ) {
-
+    fun fechaRegistroString(): LocalDate {
+        fechaRegistro=java.time.LocalDate.now()
+        return fechaRegistro
+    }
     fun obtenerReciclajes(): List<Reciclaje> {
         return reciclajes.filter { it.usuario == this }
     }
