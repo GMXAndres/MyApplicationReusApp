@@ -97,6 +97,8 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         return id
     }
 
+    ////
+
     fun getAllUsers(): List<Usuario> {
         val users = ArrayList<Usuario>()
         val db = this.readableDatabase
