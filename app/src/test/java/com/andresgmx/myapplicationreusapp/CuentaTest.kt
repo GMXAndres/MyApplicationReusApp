@@ -88,8 +88,6 @@ class CuentaTest {
         assertEquals(usuario2, cuenta.usuario)
         assertEquals("john.mckinley@examplepetstore.com", cuenta.correo)
         assertEquals(hashPassword("@a1SKlmdjd"), cuenta.hashedPassword)
-
-
     }
 
 }

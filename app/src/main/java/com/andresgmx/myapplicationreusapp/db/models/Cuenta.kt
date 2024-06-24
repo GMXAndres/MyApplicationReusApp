@@ -3,9 +3,9 @@ import java.security.MessageDigest
 import java.util.Base64
 
 class Cuenta(
-    var nombre: String,
-    var hashedPassword: String,
-    var correo: String,
+    var nombre: String? = null,
+    var hashedPassword: String? = null,
+    var correo: String? = null,
     var usuario: Usuario?=null,
 ) {
 

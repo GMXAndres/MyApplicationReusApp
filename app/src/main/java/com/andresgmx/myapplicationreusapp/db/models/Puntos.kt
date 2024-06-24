@@ -5,10 +5,18 @@ import kotlin.random.Random
 
 class Puntos(
     var cantidad: Int,
-    private var codigo: String,
+    var codigo: String? = null,
     val usuario: Usuario,
-    val recompensas: PuntosRecompensas,
+    var recompensas: MutableList<PuntosRecompensas> = mutableListOf(),
 ) {
+    override fun toString(): String {
+        return "Puntos(cantidad=$cantidad, codigo=$codigo, usuario=$usuario, recompensas=$recompensas)"
+    }
+    fun agregarRecompensa(recompensa: Recompensas) {
+        val puntosRecompensas = PuntosRecompensas(this, recompensa)
+        recompensas.add(puntosRecompensas)
+        recompensa.puntos.add(puntosRecompensas)
+    }
 
     fun randomCode(): String {
         val caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -20,13 +28,6 @@ class Puntos(
             codigo.append(caracteres[indice])
         }
         return codigo.toString()
-    }
-    init {
-        codigo = randomCode()
-    }
-
-    init {
-        cantidad=0
     }
 
     fun asignarPuntos(): Int{
@@ -50,13 +51,15 @@ class Puntos(
         val total = puntosPorPeso * puntosPorMaterialReciclado
         return total.toInt()
     }
-    init{
-        cantidad += asignarPuntos()
+
+    fun aplicarRecompensa(recompensa: Recompensas) {
+        if (cantidad >= recompensa.minPuntos) {
+            cantidad -= recompensa.minPuntos
+        } else {
+            throw IllegalArgumentException("No hay suficientes puntos para aplicar la recompensa")
+        }
     }
 
-    init{
-        cantidad -= recompensas.recompensa.restarPuntos()
-    }
 
 }
 
