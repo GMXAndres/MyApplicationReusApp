@@ -4,18 +4,14 @@ class Recompensas(
     val nombre: String,
     val minPuntos: Int,
     val descripcion: String,
-    val puntos: PuntosRecompensas,
+    val puntos: MutableList<PuntosRecompensas> = mutableListOf(),
 ) {
-
-    fun verificarPuntos(): Boolean{
-        return puntos.punto.cantidad >= minPuntos
+    override fun toString(): String {
+        return "Recompensas(nombre='$nombre', minPuntos=$minPuntos, descripcion='$descripcion', puntos=$puntos)"
     }
+    /*fun agregarPuntos(puntos: Puntos) {
+        val puntosRecompensas = PuntosRecompensas(this, puntos)
+        puntos.add(puntosRecompensas)
+    */
 
-    fun restarPuntos(): Int {
-        return if (verificarPuntos()) {
-            minPuntos
-        } else {
-            0
-        }
-    }
 }

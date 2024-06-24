@@ -11,12 +11,24 @@ class ReporteFiltrado(
     val actividadesFiltradas: List<Reciclaje>,
     val pesoTotal: Double,
     val pesoPorMaterial: Map<TipoMaterial, Double>
-)
+
+){
+    override fun toString(): String {
+        val sb = StringBuilder()
+        sb.append("Reporte Filtrado (Peso en kilogramos):\n")
+        sb.append("Peso Total: $pesoTotal\n")
+        sb.append("Peso por Material:\n")
+        for ((material, peso) in pesoPorMaterial) {
+            sb.append("- $material: $peso\n")
+        }
+        return sb.toString()
+    }
+}
 class Reporte {
     companion object {
         fun filtrarActividadesReciclaje(
             reciclajes: List<Reciclaje>,
-            fecha: LocalDate,
+            fecha: LocalDate = LocalDate.now(),
             periodicidad: Periodicidad
         ): ReporteFiltrado {
             val actividadesFiltradas = when (periodicidad) {
@@ -32,16 +44,16 @@ class Reporte {
             return ReporteFiltrado(actividadesFiltradas, pesoTotal, pesoPorMaterial)
         }
 
-        private fun Date.toLocalDate(): LocalDate {
+        /*private fun Date.toLocalDate(): LocalDate {
             return this.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
-        }
+        }*/
 
 
         private fun filtrarActividadesDiarias(
             reciclajes: List<Reciclaje>,
             fecha: LocalDate
         ): List<Reciclaje> {
-            return reciclajes.filter { it.fecha.toLocalDate() == fecha }
+            return reciclajes.filter { it.fecha == fecha }
         }
 
         private fun filtrarActividadesSemanales(
@@ -50,7 +62,7 @@ class Reporte {
         ): List<Reciclaje> {
             val primerDiaDeLaSemana = fecha.with(TemporalAdjusters.previousOrSame(LocalDate.now().dayOfWeek))
             val ultimoDiaDeLaSemana = primerDiaDeLaSemana.plusDays(6)
-            return reciclajes.filter { it.fecha.toLocalDate() in primerDiaDeLaSemana..ultimoDiaDeLaSemana }
+            return reciclajes.filter { it.fecha in primerDiaDeLaSemana..ultimoDiaDeLaSemana }
         }
 
         private fun filtrarActividadesMensuales(
@@ -59,7 +71,7 @@ class Reporte {
         ): List<Reciclaje> {
             val primerDiaDelMes = fecha.with(TemporalAdjusters.firstDayOfMonth())
             val ultimoDiaDelMes = fecha.with(TemporalAdjusters.lastDayOfMonth())
-            return reciclajes.filter { it.fecha.toLocalDate() in primerDiaDelMes..ultimoDiaDelMes }
+            return reciclajes.filter { it.fecha in primerDiaDelMes..ultimoDiaDelMes }
         }
 
         private fun filtrarActividadesAnuales(
@@ -68,7 +80,7 @@ class Reporte {
         ): List<Reciclaje> {
             val primerDiaDelAnio = fecha.with(TemporalAdjusters.firstDayOfYear())
             val ultimoDiaDelAnio = fecha.with(TemporalAdjusters.lastDayOfYear())
-            return reciclajes.filter { it.fecha.toLocalDate() in primerDiaDelAnio..ultimoDiaDelAnio }
+            return reciclajes.filter { it.fecha in primerDiaDelAnio..ultimoDiaDelAnio }
         }
 
         private fun calcularPesoTotal(actividadesFiltradas: List<Reciclaje>): Double {
