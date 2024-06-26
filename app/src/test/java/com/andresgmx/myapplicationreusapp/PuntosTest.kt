@@ -22,9 +22,15 @@ class PuntosTest {
             LocalDate.of(1990, 1, 1),
         )
 
-        val reciclaje1 = Reciclaje(TipoMaterial.VERDE, 15.0, LocalDate.now(),usuario)
-        val reciclaje2 = Reciclaje(TipoMaterial.AZUL, 5.0, LocalDate.now(), usuario)
-        val reciclaje3 = Reciclaje(TipoMaterial.ROJO, 5.0, LocalDate.now(), usuario)
+        val reciclaje1 = Reciclaje(TipoMaterial.VERDE, 15.0, LocalDate.now(), null)
+        val reciclaje2 = Reciclaje(TipoMaterial.AZUL, 5.0, LocalDate.now(), null)
+        val reciclaje3 = Reciclaje(TipoMaterial.ROJO, 5.0, LocalDate.now(), null)
+
+        var usuarios = mutableListOf(usuario)
+
+        reciclaje1.ingresarUsuarioPorCedula("1234567890", usuarios)
+        reciclaje2.ingresarUsuarioPorCedula("1234567890", usuarios)
+        reciclaje3.ingresarUsuarioPorCedula("1234567890", usuarios)
 
 
         val reciclajes = listOf(reciclaje1, reciclaje2, reciclaje3)
@@ -69,14 +75,20 @@ class PuntosTest {
         val usuario2 = Usuario(
             nombre = "ANDRES",
             apellido = "MEJIA",
-            "1234567890",
+            "1006016709",
             "5555555555",
             LocalDate.of(2002, 3, 5),
         )
 
-        val reciclaje21 = Reciclaje(TipoMaterial.VERDE, 15.0, LocalDate.now(),usuario2)
-        val reciclaje22 = Reciclaje(TipoMaterial.AZUL, 5.0, LocalDate.now(), usuario2)
-        val reciclaje23 = Reciclaje(TipoMaterial.ROJO, 1.0, LocalDate.now(), usuario2)
+        val reciclaje21 = Reciclaje(TipoMaterial.VERDE, 15.0, LocalDate.now(),null)
+        val reciclaje22 = Reciclaje(TipoMaterial.AZUL, 5.0, LocalDate.now(), null)
+        val reciclaje23 = Reciclaje(TipoMaterial.ROJO, 1.0, LocalDate.now(), null)
+        
+        usuarios.add(usuario2)
+
+        reciclaje21.ingresarUsuarioPorCedula("1006016709", usuarios)
+        reciclaje22.ingresarUsuarioPorCedula("1006016709", usuarios)
+        reciclaje23.ingresarUsuarioPorCedula("1006016709", usuarios)
 
 
         val reciclajes2 = listOf(reciclaje21, reciclaje22, reciclaje23)
