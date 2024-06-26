@@ -7,7 +7,7 @@ import java.util.Date
 class Usuario (
     var nombre: String? = null,
     var apellido: String? = null,
-    var cedula: String? = null,
+    var cedula: String,
     var telefono: String? = null,
     var fechaNacimiento: LocalDate,
     var fechaRegistro: LocalDate = LocalDate.now(),
