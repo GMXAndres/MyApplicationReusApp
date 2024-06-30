@@ -4,7 +4,8 @@ import com.andresgmx.myapplicationreusapp.db.models.enums.TipoMaterial
 import kotlin.random.Random
 
 class Puntos(
-    var cantidad: Int,
+    var id: Long? = null,
+    var cantidad: Int=0,
     var codigo: String? = null,
     val usuario: Usuario,
     var recompensas: MutableList<PuntosRecompensas> = mutableListOf(),
@@ -13,7 +14,7 @@ class Puntos(
         return "Puntos(cantidad=$cantidad, codigo=$codigo, usuario=$usuario, recompensas=$recompensas)"
     }
     fun agregarRecompensa(recompensa: Recompensas) {
-        val puntosRecompensas = PuntosRecompensas(this, recompensa)
+        val puntosRecompensas = PuntosRecompensas(punto=this, recompensa=recompensa)
         recompensas.add(puntosRecompensas)
         recompensa.puntos.add(puntosRecompensas)
     }

@@ -32,6 +32,7 @@ class UsuarioTest {
 
 
 
+
         val reciclajesFiltrados = usuario.obtenerReciclajes()
 
         assertEquals(3, reciclajesFiltrados.size)

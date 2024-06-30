@@ -5,7 +5,10 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.andresgmx.myapplicationreusapp.db.models.*
+import com.andresgmx.myapplicationreusapp.db.models.enums.Periodicidad
+import com.andresgmx.myapplicationreusapp.db.models.enums.TipoMaterial
 import com.andresgmx.myapplicationreusapp.db.models.enums.TipoVia
+import java.time.LocalDate
 
 class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -48,18 +51,39 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
         if (cursor.moveToFirst()) {
             do {
+                val id =  cursor.getLong(cursor.getColumnIndexOrThrow("id"))
                 val numeroVia = cursor.getInt(cursor.getColumnIndexOrThrow("NumeroVia"))
                 val tipoVia = TipoVia.valueOf(cursor.getString(cursor.getColumnIndexOrThrow("TipoVia")))
                 val complemento = cursor.getString(cursor.getColumnIndexOrThrow("Complemento"))
                 val barrio = cursor.getString(cursor.getColumnIndexOrThrow("Barrio"))
                 val comuna = cursor.getString(cursor.getColumnIndexOrThrow("Comuna"))
-                val direccion = Direccion(numeroVia, tipoVia, complemento, barrio, comuna)
+                val direccion = Direccion(id,numeroVia, tipoVia, complemento, barrio, comuna)
                 direcciones.add(direccion)
             } while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
         return direcciones
+    }
+
+    fun getDireccionById(direccionId: Long): Direccion? {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM cuenta WHERE id = ?", arrayOf(direccionId.toString()))
+        if (cursor.moveToFirst()) {
+            val id =  cursor.getLong(cursor.getColumnIndexOrThrow("id"))
+            val numeroVia = cursor.getInt(cursor.getColumnIndexOrThrow("NumeroVia"))
+            val tipoVia = TipoVia.valueOf(cursor.getString(cursor.getColumnIndexOrThrow("TipoVia")))
+            val complemento = cursor.getString(cursor.getColumnIndexOrThrow("Complemento"))
+            val barrio = cursor.getString(cursor.getColumnIndexOrThrow("Barrio"))
+            val comuna = cursor.getString(cursor.getColumnIndexOrThrow("Comuna"))
+            val direccion = Direccion(id,numeroVia, tipoVia, complemento, barrio, comuna)
+            cursor.close()
+            db.close()
+            return direccion
+        }
+        cursor.close()
+        db.close()
+        return null
     }
 
     // Métodos delete y update para Direccion
@@ -86,28 +110,18 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
     // UsuarioCRUD
 
-    fun createUsuario(
-        nombre: String,
-        apellido: String,
-        direccion: String,
-        cedula: Long,
-        correo: String,
-        contrasena: String,
-        telefono: Long,
-        nombreUsuario: String
-    ): Long {
+    fun createUsuario(usuario: Usuario): Long{
         val db = this.writableDatabase
         val values = ContentValues().apply {
-            put("nombre", nombre)
-            put("apellido", apellido)
-            put("direccion", direccion)
-            put("cedula", cedula)
-            put("puntos", 0)
-            put("telefono", telefono)
-            put("nombreUsuario", nombreUsuario)
-            put("contrasena", contrasena)
-            put("correo", correo)
-            put("fechaRegistro", Utils.getCurrentTime())
+            put("nombre", usuario.nombre)
+            put("apellido", usuario.apellido)
+            put("cedula", usuario.cedula)
+            put("telefono", usuario.telefono)
+            put("fechaNacimiento", usuario.fechaNacimiento.toString())
+            put("fechaRegistro", usuario.fechaRegistro.toString())
+            put("cuenta", usuario.cuenta?.nombre)  // Suponiendo que 'nombreUsuario' está en la cuenta
+            put("direccion", usuario.direccion?.id)  // Suponiendo que 'direccion' se refiere al id de la dirección
+            put("puntos", usuario.puntos?.id)
         }
 
         val id = db.insert("usuario", null, values)
@@ -124,15 +138,21 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
                 val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"))
                 val apellido = cursor.getString(cursor.getColumnIndexOrThrow("apellido"))
-                val direccion = cursor.getString(cursor.getColumnIndexOrThrow("direccion"))
-                val cedula = cursor.getLong(cursor.getColumnIndexOrThrow("cedula"))
-                val puntos = cursor.getInt(cursor.getColumnIndexOrThrow("puntos"))
-                val telefono = cursor.getLong(cursor.getColumnIndexOrThrow("telefono"))
-                val nombreUsuario = cursor.getString(cursor.getColumnIndexOrThrow("nombreUsuario"))
-                val contrasena = cursor.getString(cursor.getColumnIndexOrThrow("contrasena"))
-                val correo = cursor.getString(cursor.getColumnIndexOrThrow("correo"))
-                val fechaRegistro = cursor.getString(cursor.getColumnIndexOrThrow("fechaRegistro"))
-                val usuario = Usuario(id, nombre, apellido, direccion, cedula, puntos, telefono, nombreUsuario, contrasena, correo, fechaRegistro)
+                val cedula = cursor.getString(cursor.getColumnIndexOrThrow("cedula"))
+                val telefono = cursor.getString(cursor.getColumnIndexOrThrow("telefono"))
+                val fechaNacimiento = LocalDate.parse(cursor.getString(cursor.getColumnIndexOrThrow("fechaNacimiento")))
+                val fechaRegistro = LocalDate.parse(cursor.getString(cursor.getColumnIndexOrThrow("fechaRegistro")))
+                val cuentaId = cursor.getLong(cursor.getColumnIndexOrThrow("cuenta"))
+
+                val direccionId = cursor.getLong(cursor.getColumnIndexOrThrow("direccion"))
+                val puntosId = cursor.getLong(cursor.getColumnIndexOrThrow("puntos"))
+
+                // Obtener la cuenta asociada al usuario
+                val cuenta = getCuentaById(cuentaId)
+                val direccion = getDireccionById(direccionId)
+                val puntos = getPuntosById(puntosId)
+
+                val usuario = Usuario(id, nombre, apellido, cedula, telefono, fechaNacimiento, fechaRegistro, cuenta,  direccion, puntos)
                 users.add(usuario)
             } while (cursor.moveToNext())
         }
@@ -141,20 +161,39 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         return users
     }
 
+    fun getUsuarioById(usuarioId: Long): Usuario? {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM usuario WHERE id = ?", arrayOf(usuarioId.toString()))
+        if (cursor.moveToFirst()) {
+            val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
+            val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"))
+            val apellido = cursor.getString(cursor.getColumnIndexOrThrow("apellido"))
+            val cedula = cursor.getString(cursor.getColumnIndexOrThrow("cedula"))
+            val telefono = cursor.getString(cursor.getColumnIndexOrThrow("telefono"))
+            val fechaNacimiento = LocalDate.parse(cursor.getString(cursor.getColumnIndexOrThrow("fechaNacimiento")))
+            val fechaRegistro = LocalDate.parse(cursor.getString(cursor.getColumnIndexOrThrow("fechaRegistro")))
+            val usuario = Usuario(id, nombre, apellido, cedula, telefono, fechaNacimiento, fechaRegistro)
+            cursor.close()
+            db.close()
+            return usuario
+        }
+        cursor.close()
+        db.close()
+        return null
+    }
+
+
+
     // Métodos delete y update para Usuario
     fun updateUsuario(usuario: Usuario): Int {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put("nombre", usuario.nombre)
             put("apellido", usuario.apellido)
-            put("direccion", usuario.direccion)
             put("cedula", usuario.cedula)
-            put("puntos", usuario.puntos)
             put("telefono", usuario.telefono)
-            put("nombreUsuario", usuario.nombreUsuario)
-            put("contrasena", usuario.contrasena)
-            put("correo", usuario.correo)
-            put("fechaRegistro", usuario.fechaRegistro)
+            put("fechaNacimiento", usuario.fechaNacimiento.toString())
+            put("fechaRegistro", usuario.fechaRegistro.toString())
         }
         val rowsUpdated = db.update("usuario", values, "id = ?", arrayOf(usuario.id.toString()))
         db.close()
@@ -169,13 +208,15 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     }
 
     // CuentaCRUD
-    fun createCuenta(cuenta: Cuenta): Long {
+    fun createCuenta(cuenta: Cuenta, contraseña: String): Long {
         val db = this.writableDatabase
+        val hashedPassword = Cuenta.hashPassword(contraseña)
         val values = ContentValues().apply {
-            put("numero", cuenta.numero)
-            put("tipo", cuenta.tipo.toString())
-            put("banco", cuenta.banco)
-            put("usuario_id", cuenta.usuarioId)
+            put("id", cuenta.id)
+            put("nombre", cuenta.nombre)
+            put("hashedPassword", hashedPassword)
+            put("correo", cuenta.correo)
+            put("usuario_id", cuenta.usuario.id)
         }
         val id = db.insert("cuenta", null, values)
         db.close()
@@ -189,11 +230,12 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         if (cursor.moveToFirst()) {
             do {
                 val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
-                val numero = cursor.getString(cursor.getColumnIndexOrThrow("numero"))
-                val tipo = TipoCuenta.valueOf(cursor.getString(cursor.getColumnIndexOrThrow("tipo")))
-                val banco = cursor.getString(cursor.getColumnIndexOrThrow("banco"))
+                val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"))
+                val hashedPassword = cursor.getString(cursor.getColumnIndexOrThrow("hashedPassword"))
+                val correo = cursor.getString(cursor.getColumnIndexOrThrow("correo"))
                 val usuarioId = cursor.getLong(cursor.getColumnIndexOrThrow("usuario_id"))
-                val cuenta = Cuenta(id, numero, tipo, banco, usuarioId)
+                val usuario = getUsuarioById(usuarioId)?: throw IllegalArgumentException("Usuario no encontrado para ID: $usuarioId")
+                val cuenta = Cuenta(id, nombre, hashedPassword, correo, usuario)
                 cuentas.add(cuenta)
             } while (cursor.moveToNext())
         }
@@ -202,13 +244,35 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         return cuentas
     }
 
-    fun updateCuenta(cuenta: Cuenta): Int {
+    fun getCuentaById(cuentaId: Long): Cuenta? {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM cuenta WHERE id = ?", arrayOf(cuentaId.toString()))
+        if (cursor.moveToFirst()) {
+            val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
+            val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"))
+            val hashedPassword = cursor.getString(cursor.getColumnIndexOrThrow("hashedPassword"))
+            val correo = cursor.getString(cursor.getColumnIndexOrThrow("correo"))
+            val usuarioId = cursor.getLong(cursor.getColumnIndexOrThrow("usuario_id"))
+            val usuario = getUsuarioById(usuarioId)?: throw IllegalArgumentException("Usuario no encontrado para ID: $usuarioId")
+            val cuenta = Cuenta(id, nombre, hashedPassword, correo, usuario)
+            cursor.close()
+            db.close()
+            return cuenta
+        }
+        cursor.close()
+        db.close()
+        return null
+    }
+
+    fun updateCuenta(cuenta: Cuenta, contraseña: String): Int {
         val db = this.writableDatabase
+        val hashedPassword = Cuenta.hashPassword(contraseña)
         val values = ContentValues().apply {
-            put("numero", cuenta.numero)
-            put("tipo", cuenta.tipo.toString())
-            put("banco", cuenta.banco)
-            put("usuario_id", cuenta.usuarioId)
+            put("id", cuenta.id)
+            put("nombre", cuenta.nombre)
+            put("hashedPassword", hashedPassword)
+            put("correo", cuenta.correo)
+            put("usuario_id", cuenta.usuario.id)
         }
         val rowsUpdated = db.update("cuenta", values, "id = ?", arrayOf(cuenta.id.toString()))
         db.close()
@@ -225,12 +289,20 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     // PuntosCRUD
     fun createPuntos(puntos: Puntos): Long {
         val db = this.writableDatabase
+        val codigo = puntos.randomCode()
         val values = ContentValues().apply {
-            put("usuario_id", puntos.usuarioId)
             put("cantidad", puntos.cantidad)
-            put("fecha", puntos.fecha)
+            put("codigo", codigo)
+            put("usuario_id", puntos.usuario.id)
         }
         val id = db.insert("puntos", null, values)
+        for (puntosRecompensas in puntos.recompensas) {
+            val valuesPR = ContentValues().apply {
+                put("puntos_id", id)
+                put("recompensa_id", puntosRecompensas.recompensa.id)
+            }
+            db.insert("puntos_recompensas", null, valuesPR)
+        }
         db.close()
         return id
     }
@@ -242,10 +314,11 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         if (cursor.moveToFirst()) {
             do {
                 val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
-                val usuarioId = cursor.getLong(cursor.getColumnIndexOrThrow("usuario_id"))
                 val cantidad = cursor.getInt(cursor.getColumnIndexOrThrow("cantidad"))
-                val fecha = cursor.getString(cursor.getColumnIndexOrThrow("fecha"))
-                val puntos = Puntos(id, usuarioId, cantidad, fecha)
+                val codigo = cursor.getString(cursor.getColumnIndexOrThrow("codigo"))
+                val usuarioId = cursor.getLong(cursor.getColumnIndexOrThrow("usuario_id"))
+                val usuario = getUsuarioById(usuarioId) ?: throw IllegalArgumentException("Usuario no encontrado para ID: $usuarioId")  // Método que necesitas implementar para obtener un usuario por ID
+                val puntos = Puntos(id, cantidad, codigo, usuario)
                 puntosList.add(puntos)
             } while (cursor.moveToNext())
         }
@@ -254,16 +327,50 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         return puntosList
     }
 
+    fun getPuntosById(puntosId: Long): Puntos? {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM puntos WHERE id = ?", arrayOf(puntosId.toString()))
+        if (cursor.moveToFirst()) {
+            val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
+            val cantidad = cursor.getInt(cursor.getColumnIndexOrThrow("cantidad"))
+            val codigo = cursor.getString(cursor.getColumnIndexOrThrow("codigo"))
+            val usuarioId = cursor.getLong(cursor.getColumnIndexOrThrow("usuario_id"))
+            val usuario = getUsuarioById(usuarioId) ?: throw IllegalArgumentException("Usuario no encontrado para ID: $usuarioId")
+            cursor.close()
+            db.close()
+            return Puntos(id, cantidad, codigo, usuario)
+        }
+        cursor.close()
+        db.close()
+        return null
+    }
+
+
+
+
+
+
+
+
     fun updatePuntos(puntos: Puntos): Int {
         val db = this.writableDatabase
         val values = ContentValues().apply {
-            put("usuario_id", puntos.usuarioId)
             put("cantidad", puntos.cantidad)
-            put("fecha", puntos.fecha)
         }
         val rowsUpdated = db.update("puntos", values, "id = ?", arrayOf(puntos.id.toString()))
         db.close()
         return rowsUpdated
+    }
+
+    fun asignarPuntos(puntos: Puntos): Int {
+        val cantidad = puntos.asignarPuntos()
+        puntos.cantidad += cantidad
+        updatePuntos(puntos) // Actualiza la cantidad de puntos en la base de datos
+        return cantidad
+    }
+    fun aplicarRecompensa(puntos: Puntos, recompensa: Recompensas) {
+        puntos.aplicarRecompensa(recompensa)
+        updatePuntos(puntos)
     }
 
     fun deletePuntos(id: Long): Int {
@@ -274,10 +381,10 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     }
 
     // RecompensaCRUD
-    fun createRecompensa(recompensa: Recompensa): Long {
+    fun createRecompensa(recompensa: Recompensas): Long {
         val db = this.writableDatabase
         val values = ContentValues().apply {
-            put("usuario_id", recompensa.usuarioId)
+            put("id", recompensa.id)
             put("nombre", recompensa.nombre)
             put("min_puntos", recompensa.minPuntos)
             put("descripcion", recompensa.descripcion)
@@ -287,18 +394,17 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         return id
     }
 
-    fun getAllRecompensas(): List<Recompensa> {
-        val recompensas = ArrayList<Recompensa>()
+    fun getAllRecompensas(): List<Recompensas> {
+        val recompensas = ArrayList<Recompensas>()
         val db = this.readableDatabase
         val cursor = db.rawQuery("SELECT * FROM recompensa", null)
         if (cursor.moveToFirst()) {
             do {
                 val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
-                val usuarioId = cursor.getLong(cursor.getColumnIndexOrThrow("usuario_id"))
                 val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"))
                 val minPuntos = cursor.getInt(cursor.getColumnIndexOrThrow("min_puntos"))
                 val descripcion = cursor.getString(cursor.getColumnIndexOrThrow("descripcion"))
-                val recompensa = Recompensa(id, usuarioId, nombre, minPuntos, descripcion)
+                val recompensa = Recompensas(id,  nombre, minPuntos, descripcion)
                 recompensas.add(recompensa)
             } while (cursor.moveToNext())
         }
@@ -307,10 +413,26 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         return recompensas
     }
 
-    fun updateRecompensa(recompensa: Recompensa): Int {
+    fun getRecompensaById(recompensaId: Long): Recompensas? {
+        var recompensa: Recompensas? = null
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM recompensa WHERE id = ?", arrayOf(recompensaId.toString()))
+        if (cursor.moveToFirst()) {
+            val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
+            val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"))
+            val minPuntos = cursor.getInt(cursor.getColumnIndexOrThrow("min_puntos"))
+            val descripcion = cursor.getString(cursor.getColumnIndexOrThrow("descripcion"))
+            recompensa = Recompensas(id, nombre, minPuntos, descripcion)
+        }
+        cursor.close()
+        db.close()
+        return recompensa
+    }
+
+    fun updateRecompensa(recompensa: Recompensas): Int {
         val db = this.writableDatabase
         val values = ContentValues().apply {
-            put("usuario_id", recompensa.usuarioId)
+            put("id", recompensa.id)
             put("nombre", recompensa.nombre)
             put("min_puntos", recompensa.minPuntos)
             put("descripcion", recompensa.descripcion)
@@ -331,10 +453,10 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     fun createReciclaje(reciclaje: Reciclaje): Long {
         val db = this.writableDatabase
         val values = ContentValues().apply {
-            put("usuario_id", reciclaje.usuarioId)
-            put("material", reciclaje.material)
+            put("material", reciclaje.material.toString())
             put("peso", reciclaje.peso)
-            put("fecha", reciclaje.fecha)
+            put("fecha", reciclaje.fecha.toString())
+            put("usuario_id", reciclaje.usuario?.cedula)
         }
         val id = db.insert("reciclaje", null, values)
         db.close()
@@ -348,11 +470,12 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         if (cursor.moveToFirst()) {
             do {
                 val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
-                val usuarioId = cursor.getLong(cursor.getColumnIndexOrThrow("usuario_id"))
-                val material = cursor.getString(cursor.getColumnIndexOrThrow("material"))
-                val peso = cursor.getFloat(cursor.getColumnIndexOrThrow("peso"))
-                val fecha = cursor.getString(cursor.getColumnIndexOrThrow("fecha"))
-                val reciclaje = Reciclaje(id, usuarioId, material, peso, fecha)
+                val materialStr = cursor.getString(cursor.getColumnIndexOrThrow("material"))
+                val material = TipoMaterial.valueOf(materialStr)
+
+                val peso = cursor.getDouble(cursor.getColumnIndexOrThrow("peso"))
+                val fecha = LocalDate.parse(cursor.getString(cursor.getColumnIndexOrThrow("fecha")))
+                val reciclaje = Reciclaje(id, material, peso, fecha)
                 reciclajes.add(reciclaje)
             } while (cursor.moveToNext())
         }
@@ -364,10 +487,10 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     fun updateReciclaje(reciclaje: Reciclaje): Int {
         val db = this.writableDatabase
         val values = ContentValues().apply {
-            put("usuario_id", reciclaje.usuarioId)
-            put("material", reciclaje.material)
+            put("material", reciclaje.material.toString())
             put("peso", reciclaje.peso)
-            put("fecha", reciclaje.fecha)
+            put("fecha", reciclaje.fecha.toString())
+            put("usuario_id", reciclaje.usuario?.cedula)
         }
         val rowsUpdated = db.update("reciclaje", values, "id = ?", arrayOf(reciclaje.id.toString()))
         db.close()
@@ -385,8 +508,9 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     fun createPuntosRecompensas(puntosRecompensas: PuntosRecompensas): Long {
         val db = this.writableDatabase
         val values = ContentValues().apply {
-            put("puntos_id", puntosRecompensas.puntosId)
-            put("recompensa_id", puntosRecompensas.recompensaId)
+            put("id", puntosRecompensas.id)
+            put("puntos_id", puntosRecompensas.punto.id)
+            put("recompensa_id", puntosRecompensas.recompensa.id)
         }
         val id = db.insert("puntosrecompensas", null, values)
         db.close()
@@ -402,7 +526,9 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                 val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
                 val puntosId = cursor.getLong(cursor.getColumnIndexOrThrow("puntos_id"))
                 val recompensaId = cursor.getLong(cursor.getColumnIndexOrThrow("recompensa_id"))
-                val puntosRecompensas = PuntosRecompensas(id, puntosId, recompensaId)
+                val punto = getPuntosById(puntosId) ?: throw IllegalArgumentException("Puntos no encontrado para ID: $puntosId")
+                val recompensa = getRecompensaById(recompensaId) ?: throw IllegalArgumentException("Recompensa no encontrada para ID: $recompensaId")
+                val puntosRecompensas = PuntosRecompensas(id, punto, recompensa)
                 puntosRecompensasList.add(puntosRecompensas)
             } while (cursor.moveToNext())
         }
@@ -414,8 +540,9 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     fun updatePuntosRecompensas(puntosRecompensas: PuntosRecompensas): Int {
         val db = this.writableDatabase
         val values = ContentValues().apply {
-            put("puntos_id", puntosRecompensas.puntosId)
-            put("recompensa_id", puntosRecompensas.recompensaId)
+            put("id", puntosRecompensas.id)
+            put("puntos_id", puntosRecompensas.punto.id)
+            put("recompensa_id", puntosRecompensas.recompensa.id)
         }
         val rowsUpdated = db.update("puntosrecompensas", values, "id = ?", arrayOf(puntosRecompensas.id.toString()))
         db.close()
@@ -430,113 +557,68 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     }
 
     // ReporteCRUD
-    fun createReporte(reporte: Reporte): Long {
-        val db = this.writableDatabase
-        val values = ContentValues().apply {
-            put("reciclaje_id", reporte.reciclajeId)
-            put("periodicidad", reporte.periodicidad)
-        }
-        val id = db.insert("reporte", null, values)
-        db.close()
-        return id
+    fun getReportes(fecha: LocalDate, periodicidad: Periodicidad): ReporteFiltrado {
+        val reciclajes = getAllReciclajes()
+        return Reporte.filtrarActividadesReciclaje(reciclajes, fecha, periodicidad)
     }
 
-    fun getAllReportes(): List<Reporte> {
-        val reportes = ArrayList<Reporte>()
-        val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM reporte", null)
-        if (cursor.moveToFirst()) {
-            do {
-                val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
-                val reciclajeId = cursor.getLong(cursor.getColumnIndexOrThrow("reciclaje_id"))
-                val periodicidad = cursor.getString(cursor.getColumnIndexOrThrow("periodicidad"))
-                val reporte = Reporte(id, reciclajeId, periodicidad)
-                reportes.add(reporte)
-            } while (cursor.moveToNext())
-        }
-        cursor.close()
-        db.close()
-        return reportes
-    }
 
-    fun updateReporte(reporte: Reporte): Int {
-        val db = this.writableDatabase
-        val values = ContentValues().apply {
-            put("reciclaje_id", reporte.reciclajeId)
-            put("periodicidad", reporte.periodicidad)
-        }
-        val rowsUpdated = db.update("reporte", values, "id = ?", arrayOf(reporte.id.toString()))
-        db.close()
-        return rowsUpdated
-    }
 
-    fun deleteReporte(id: Long): Int {
-        val db = this.writableDatabase
-        val rowsDeleted = db.delete("reporte", "id = ?", arrayOf(id.toString()))
-        db.close()
-        return rowsDeleted
-    }
 
     companion object {
+
+
         const val DATABASE_VERSION = 1
         const val DATABASE_NAME = "db_reusapp"
         const val DATABASE_CREATE =
             "CREATE TABLE usuario (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "cedula INTEGER," +
-                    "puntos INTEGER," +
                     "nombre TEXT," +
                     "apellido TEXT," +
-                    "telefono INTEGER," +
-                    "direccion TEXT," +
+                    "cedula TEXT," +
+                    "telefono TEXT," +
+                    "fechaNacimiento TEXT," +
                     "fechaRegistro TEXT," +
-                    "nombreUsuario TEXT," +
-                    "contrasena TEXT," +
-                    "correo TEXT" +
+                    "cuenta_id INTEGER," +
+                    "direccion_id INTEGER," +
+                    "puntos_id INTEGER" +
                     ");" +
-                    "CREATE TABLE recompensa (" +
+                    "CREATE TABLE cuenta (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "usuario_id INTEGER," +
                     "nombre TEXT," +
-                    "min_puntos INTEGER," +
-                    "descripcion TEXT," +
-                    "FOREIGN KEY(usuario_id) REFERENCES usuario(id)" +
-                    ");" +
-                    "CREATE TABLE reciclaje (" +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "hashedPassword TEXT," +
+                    "correo TEXT," +
                     "usuario_id INTEGER," +
-                    "material TEXT," +
-                    "peso FLOAT," +
-                    "fecha TEXT," +
                     "FOREIGN KEY(usuario_id) REFERENCES usuario(id)" +
                     ");" +
                     "CREATE TABLE direccion (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "NumeroVia TEXT," +
-                    "TipoVia TEXT," +
-                    "Complemento TEXT," +
-                    "Barrio TEXT," +
-                    "Comuna TEXT" +
+                    "numeroVia INTEGER," +
+                    "tipoVia TEXT," +
+                    "complemento TEXT," +
+                    "barrio TEXT," +
+                    "comuna TEXT," +
+                    "codigoPostal TEXT" +
                     ");" +
-                    "CREATE TABLE reporte (" +
+                    "CREATE TABLE reciclaje (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "reciclaje_id INTEGER," +
-                    "periodicidad TEXT," +
-                    "FOREIGN KEY(reciclaje_id) REFERENCES reciclaje(id)" +
-                    ");" +
-                    "CREATE TABLE cuenta (" +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "numero TEXT," +
-                    "tipo TEXT," +
-                    "banco TEXT," +
+                    "material TEXT," +
+                    "peso REAL," +
+                    "fecha TEXT," +
                     "usuario_id INTEGER," +
                     "FOREIGN KEY(usuario_id) REFERENCES usuario(id)" +
                     ");" +
+                    "CREATE TABLE recompensa (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "nombre TEXT," +
+                    "min_puntos INTEGER," +
+                    "descripcion TEXT" +
+                    ");" +
                     "CREATE TABLE puntos (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "usuario_id INTEGER," +
                     "cantidad INTEGER," +
-                    "fecha TEXT," +
+                    "codigo TEXT," +
+                    "usuario_id INTEGER," +
                     "FOREIGN KEY(usuario_id) REFERENCES usuario(id)" +
                     ");" +
                     "CREATE TABLE puntosrecompensas (" +
@@ -546,6 +628,6 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                     "FOREIGN KEY(puntos_id) REFERENCES puntos(id)," +
                     "FOREIGN KEY(recompensa_id) REFERENCES recompensa(id)" +
                     ");"
+
     }
 }
-

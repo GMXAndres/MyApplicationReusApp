@@ -5,6 +5,7 @@ import java.time.LocalDate
 import java.util.Date
 
 class Usuario (
+    var id: Long? = null,
     var nombre: String? = null,
     var apellido: String? = null,
     var cedula: String,
@@ -31,8 +32,6 @@ class Usuario (
     fun obtenerReciclajes(): MutableList<Reciclaje> {
         return reciclajes
     }
-
-
 
 
     fun calcularPesoTotalPorMaterial(reciclajes: MutableList<Reciclaje>): Pair<Double, Map<TipoMaterial, Double>> {

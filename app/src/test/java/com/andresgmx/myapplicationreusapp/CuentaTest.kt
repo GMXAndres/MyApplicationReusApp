@@ -14,13 +14,24 @@ class CuentaTest {
 
     @Test
     fun testHashPassword() {
+        val cuenta = Cuenta(1,"johnmickley", "mypassword", "thomas.todd@example.com", Usuario(1,"John", "Mckinley","1234567890","3333333333", LocalDate.of(1990, 1, 1), LocalDate.now()))
         val invalidPassword = "mypassword"
         val validPassword = "A1@bcdef"
-        val expectedHashedPassword = hashPassword("A1@bcdef")
-        assertEquals(expectedHashedPassword, Cuenta.hashPassword(validPassword))
+        cuenta.hashedPassword = Cuenta.hashPassword(validPassword)
+        val expectedHashedPassword = hashPassword(validPassword)
+        assertEquals(expectedHashedPassword, hashPassword(validPassword))
         assertThrows(IllegalArgumentException::class.java){
-            Cuenta.hashPassword(invalidPassword)
+            hashPassword(invalidPassword)
         }
+
+        println("Original password: $validPassword")
+        println("Hashed password: $expectedHashedPassword")
+        assertTrue(cuenta.checkPassword(validPassword))
+        assertFalse(cuenta.checkPassword("A2@bcdef"))
+
+
+
+
     }
 
     @Test

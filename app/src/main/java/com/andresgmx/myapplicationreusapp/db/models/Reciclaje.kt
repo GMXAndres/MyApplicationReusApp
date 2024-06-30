@@ -5,6 +5,7 @@ import java.time.LocalDate
 
 
 class Reciclaje(
+    var id: Long? = null,
     var material: TipoMaterial,
     var peso: Double,
     var fecha: LocalDate  = LocalDate.now(),
@@ -18,7 +19,6 @@ class Reciclaje(
         val usuario = usuarios.find { it.cedula == cedula }
         return usuario ?: throw IllegalArgumentException("No hay usuario con esa cédula")
     }
-
 
 
 

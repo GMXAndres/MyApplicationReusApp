@@ -3,10 +3,11 @@ import java.security.MessageDigest
 import java.util.Base64
 
 class Cuenta(
+    var id: Long? = null,
     var nombre: String? = null,
     var hashedPassword: String? = null,
     var correo: String? = null,
-    var usuario: Usuario?=null,
+    var usuario: Usuario,
 ) {
 
     /*fun actualizarNombre(nuevoNombre: String) {

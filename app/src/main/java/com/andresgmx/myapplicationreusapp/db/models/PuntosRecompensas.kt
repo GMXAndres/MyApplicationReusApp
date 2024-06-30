@@ -1,6 +1,7 @@
 package com.andresgmx.myapplicationreusapp.db.models
 
 class PuntosRecompensas(
+    val id: Long? = null,
     val punto: Puntos,
     val recompensa: Recompensas
 ) {

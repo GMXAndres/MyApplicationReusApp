@@ -2,6 +2,7 @@ package com.andresgmx.myapplicationreusapp.db.models;
 import com.andresgmx.myapplicationreusapp.db.models.enums.TipoVia;
 
 public class Direccion(
+    var id: Long? = null,
     var numeroVia: Int? = null,
     var tipoVia: TipoVia? = null,
     var complemento: String? = null,
