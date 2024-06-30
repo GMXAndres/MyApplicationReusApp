@@ -23,6 +23,7 @@ class ReporteTest {
     @Test
     fun testFiltrarActividadesReciclaje() {
         val usuario = Usuario(
+            id = 1,
             nombre = "John",
             apellido = "Doe",
             cedula = "1234567890",
@@ -30,16 +31,16 @@ class ReporteTest {
             fechaNacimiento = LocalDate.of(1990, 1, 1)
         )
 
-        val reciclaje1 = Reciclaje(TipoMaterial.VERDE, 15.0, randomDate(), usuario)
-        val reciclaje2 = Reciclaje(TipoMaterial.AZUL, 5.0, randomDate(), usuario)
-        val reciclaje3 = Reciclaje(TipoMaterial.ROJO, 5.0, randomDate(), usuario)
-        val reciclaje4 = Reciclaje(TipoMaterial.NARANJA, 10.0, randomDate(), usuario)
-        val reciclaje5 = Reciclaje(TipoMaterial.AZUL, 20.0, randomDate(), usuario)
-        val reciclaje6 = Reciclaje(TipoMaterial.GRIS, 8.0, randomDate(), usuario)
-        val reciclaje7 = Reciclaje(TipoMaterial.VERDE, 12.0, randomDate(), usuario)
-        val reciclaje8 = Reciclaje(TipoMaterial.AZUL, 18.0, randomDate(), usuario)
-        val reciclaje9 = Reciclaje(TipoMaterial.AMARILLO, 6.0, randomDate(), usuario)
-        val reciclaje10 = Reciclaje(TipoMaterial.VERDE, 8.0, randomDate(), usuario)
+        val reciclaje1 = Reciclaje(1,TipoMaterial.VERDE, 15.0, randomDate(), usuario)
+        val reciclaje2 = Reciclaje(2,TipoMaterial.AZUL, 5.0, randomDate(), usuario)
+        val reciclaje3 = Reciclaje(3,TipoMaterial.ROJO, 5.0, randomDate(), usuario)
+        val reciclaje4 = Reciclaje(4,TipoMaterial.NARANJA, 10.0, randomDate(), usuario)
+        val reciclaje5 = Reciclaje(5,TipoMaterial.AZUL, 20.0, randomDate(), usuario)
+        val reciclaje6 = Reciclaje(6,TipoMaterial.GRIS, 8.0, randomDate(), usuario)
+        val reciclaje7 = Reciclaje(7,TipoMaterial.VERDE, 12.0, randomDate(), usuario)
+        val reciclaje8 = Reciclaje(8,TipoMaterial.AZUL, 18.0, randomDate(), usuario)
+        val reciclaje9 = Reciclaje(9,TipoMaterial.AMARILLO, 6.0, randomDate(), usuario)
+        val reciclaje10 = Reciclaje(10,TipoMaterial.VERDE, 8.0, randomDate(), usuario)
 
         val reciclajes = listOf(reciclaje1, reciclaje2, reciclaje3, reciclaje4, reciclaje5,
             reciclaje6, reciclaje7, reciclaje8, reciclaje9, reciclaje10)

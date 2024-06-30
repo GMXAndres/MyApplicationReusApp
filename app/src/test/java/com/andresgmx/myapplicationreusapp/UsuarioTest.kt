@@ -13,6 +13,7 @@ class UsuarioTest {
     fun testObtenerYAgregarReciclajes() {
         // Definir un usuario para la prueba
         val usuario = Usuario(
+            1,
             "John",
             "Doe",
             "1234567890",
@@ -21,10 +22,10 @@ class UsuarioTest {
         )
 
         // Crear algunos reciclajes con diferentes usuarios
-        val reciclaje1 = Reciclaje(TipoMaterial.VERDE, 10.0, LocalDate.now(), usuario)
-        val reciclaje2 = Reciclaje(TipoMaterial.AZUL, 5.0, LocalDate.now(), usuario)
-        val reciclaje3 = Reciclaje(TipoMaterial.AZUL, 5.0, LocalDate.now(), usuario)
-        val reciclaje4 = Reciclaje(TipoMaterial.VERDE, 3.0, LocalDate.now(), Usuario("Jane", "Smith", "0987654321", "6666666666", LocalDate.of(1985, 5, 10), LocalDate.now()))
+        val reciclaje1 = Reciclaje(1,TipoMaterial.VERDE, 10.0, LocalDate.now(), usuario)
+        val reciclaje2 = Reciclaje(2,TipoMaterial.AZUL, 5.0, LocalDate.now(), usuario)
+        val reciclaje3 = Reciclaje(3,TipoMaterial.AZUL, 5.0, LocalDate.now(), usuario)
+        val reciclaje4 = Reciclaje(4,TipoMaterial.VERDE, 3.0, LocalDate.now(), Usuario(2,"Jane", "Smith", "0987654321", "6666666666", LocalDate.of(1985, 5, 10), LocalDate.now()))
 
         usuario.agregarReciclaje(reciclaje1)
         usuario.agregarReciclaje(reciclaje2)
@@ -48,6 +49,7 @@ class UsuarioTest {
     @Test
     fun testCalcularPesoTotalPorMaterial(){
         val usuario = Usuario(
+            1,
             "John",
             "Doe",
             "1234567890",
@@ -56,12 +58,12 @@ class UsuarioTest {
         )
 
         // Crear algunos reciclajes
-        val reciclaje1 = Reciclaje(TipoMaterial.VERDE, 15.0, LocalDate.now(),usuario)
-        val reciclaje2 = Reciclaje(TipoMaterial.AZUL, 5.0, LocalDate.now(), usuario)
-        val reciclaje3 = Reciclaje(TipoMaterial.AZUL, 20.0, LocalDate.now(), usuario)
-        val reciclaje4 = Reciclaje(TipoMaterial.ROJO, 5.0, LocalDate.now(), usuario)
-        val reciclaje5 = Reciclaje(TipoMaterial.ROJO, 8.0, LocalDate.now(), usuario)
-        val reciclaje6 = Reciclaje(TipoMaterial.NARANJA, 1.0, LocalDate.now(), usuario)
+        val reciclaje1 = Reciclaje(1,TipoMaterial.VERDE, 15.0, LocalDate.now(),usuario)
+        val reciclaje2 = Reciclaje(2,TipoMaterial.AZUL, 5.0, LocalDate.now(), usuario)
+        val reciclaje3 = Reciclaje(3,TipoMaterial.AZUL, 20.0, LocalDate.now(), usuario)
+        val reciclaje4 = Reciclaje(4,TipoMaterial.ROJO, 5.0, LocalDate.now(), usuario)
+        val reciclaje5 = Reciclaje(5,TipoMaterial.ROJO, 8.0, LocalDate.now(), usuario)
+        val reciclaje6 = Reciclaje(6,TipoMaterial.NARANJA, 1.0, LocalDate.now(), usuario)
 
         val reciclajes = listOf(reciclaje1, reciclaje2, reciclaje3, reciclaje4, reciclaje5, reciclaje6).toMutableList()
         val (pesoTotal,pesoPorMaterial) = usuario.calcularPesoTotalPorMaterial(reciclajes)

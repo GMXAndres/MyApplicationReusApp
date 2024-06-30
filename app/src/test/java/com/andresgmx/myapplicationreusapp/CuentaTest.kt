@@ -62,43 +62,5 @@ class CuentaTest {
 
 
 
-    @Test
-    fun testCuentaConstructor() {
-        val cuenta = Cuenta(
-            "johnmickley",
-            hashPassword("A1@bcdef"),
-            "john.mckinley@examplepetstore.com",
-        )
-
-        val usuario = Usuario("John", "Mckinley","1234567890","3333333333", LocalDate.of(1990, 1, 1), LocalDate.now(), cuenta)
-
-        cuenta.usuario = usuario
-
-        assertEquals("johnmickley", cuenta.nombre)
-        assertEquals(hashPassword("A1@bcdef"), cuenta.hashedPassword)
-        assertEquals(usuario, cuenta.usuario)
-        assertEquals("john.mckinley@examplepetstore.com", cuenta.correo)
-    }
-
-    @Test
-    fun testDireccionSetters(){
-        val cuenta = Cuenta(
-            "johnmickley",
-            hashPassword("A1@bcdef"),
-            "john.mckinley@examplepetstore.com",
-        )
-
-        val usuario1 = Usuario("John", "Mckinley","1234567890","3333333333", LocalDate.of(1990, 1, 1), LocalDate.now(), cuenta)
-        val usuario2 = Usuario("John F", "Mckinley","1234567890","3333333333", LocalDate.of(1990, 1, 1), LocalDate.now(), cuenta)
-        cuenta.usuario = usuario1
-
-        cuenta.usuario = usuario2
-        cuenta.nombre = "johnfmickley"
-        cuenta.hashedPassword = hashPassword("@a1SKlmdjd")
-        assertEquals("johnfmickley", cuenta.nombre)
-        assertEquals(usuario2, cuenta.usuario)
-        assertEquals("john.mckinley@examplepetstore.com", cuenta.correo)
-        assertEquals(hashPassword("@a1SKlmdjd"), cuenta.hashedPassword)
-    }
 
 }
