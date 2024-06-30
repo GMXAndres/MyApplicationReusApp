@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MyApplicationReusApp"
         tools:targetApi="31">
         <activity
+            android:name=".HistorialReciclaje"
+            android:exported="false" />
+        <activity
             android:name=".UpdatePassActivity"
             android:exported="false" />
         <activity
@@ -26,6 +29,7 @@
             android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -58,6 +62,6 @@
             android:name=".MainActivity"
             android:exported="false"
             android:theme="@style/Theme.Main" />
-</application>
+    </application>
 
-    </manifest>
+</manifest>

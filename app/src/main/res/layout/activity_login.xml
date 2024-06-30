@@ -46,7 +46,7 @@
             android:autofillHints="emailAddress"
             android:backgroundTint="@color/black"
             android:hint="@string/exampleEmail"
-            android:maxLength="21"
+            android:maxLength="50"
             android:maxLines="1"
             android:singleLine="true"
             android:textColorHint="@color/etEmpty" />

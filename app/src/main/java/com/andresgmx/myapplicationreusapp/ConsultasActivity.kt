@@ -8,14 +8,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.andresgmx.myapplicationreusapp.db.dbConnection
 
 class ConsultasActivity : AppCompatActivity() {
     private lateinit var btnHorario: Button
+    private lateinit var btnHistorial: Button
+    private lateinit var dbConnection: dbConnection
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_consultas)
-
+        dbConnection = dbConnection(this)
         setupActionBar()
         initcomponents()
         initListeners()
@@ -26,9 +29,14 @@ class ConsultasActivity : AppCompatActivity() {
             insets
         }
     }
+    private fun navigateTo(activityClass: Class<*>) {
+        val intent = Intent(this, activityClass)
+        startActivity(intent)
+    }
 
     private fun initcomponents() {
         btnHorario = findViewById(R.id.btnHorario)
+        btnHistorial = findViewById(R.id.btnHistorial)
     }
 
     private fun initListeners() {
@@ -37,6 +45,10 @@ class ConsultasActivity : AppCompatActivity() {
                 "https://www.amb.gov.co/punto-limpio-metropolitano-de-bucaramanga-y-14-sitios-mas-en-santander-estan-recibiendo-los-residuos-pos-consumo-hoy-y-manana/"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(urlHorario))
             startActivity(intent)
+        }
+        btnHistorial.setOnClickListener {
+
+            navigateTo(HistorialReciclaje::class.java)
         }
     }
 
@@ -51,4 +63,5 @@ class ConsultasActivity : AppCompatActivity() {
         onBackPressedDispatcher.onBackPressed()
         return true
     }
+
 }
