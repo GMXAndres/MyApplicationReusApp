@@ -11,4 +11,8 @@ public class Direccion(
     var codigoPostal: String? = null,
 ){
 
+    override fun toString(): String {
+        return "Direccion(id=$id, numeroVia=$numeroVia, tipoVia=$tipoVia, complemento=$complemento, barrio=$barrio, comuna=$comuna, codigoPostal=$codigoPostal)"
+    }
+
 }
