@@ -9,8 +9,51 @@ import com.andresgmx.myapplicationreusapp.db.models.enums.Periodicidad
 import com.andresgmx.myapplicationreusapp.db.models.enums.TipoMaterial
 import com.andresgmx.myapplicationreusapp.db.models.enums.TipoVia
 import java.time.LocalDate
+interface IDbConnection {
+    fun createDireccion(direccion: Direccion): Long
+    fun getAllDirecciones(): List<Direccion>
+    fun getDireccionById(direccionId: Long): Direccion?
+    fun updateDireccion(direccion: Direccion): Int
+    fun deleteDireccion(id: Long): Int
 
-class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+    fun createCuenta(cuenta: Cuenta, contraseña: String): Long
+    fun getAllCuentas(): List<Cuenta>
+    fun getCuentaById(cuentaId: Long): Cuenta?
+    fun updateCuenta(cuenta: Cuenta, contraseña: String): Int
+    fun deleteCuenta(id: Long): Int
+
+    fun createUsuario(usuario: Usuario): Long
+    fun getAllUsuarios(): List<Usuario>
+    fun getUsuarioById(usuarioId: Long): Usuario?
+    fun updateUsuario(usuario: Usuario): Int
+    fun deleteUsuario(id: Long): Int
+
+    fun createReciclaje(reciclaje: Reciclaje): Long
+    fun getAllReciclajes(): List<Reciclaje>
+    fun updateReciclaje(reciclaje: Reciclaje): Int
+    fun deleteReciclaje(id: Long): Int
+
+    fun getReciclajeById(reciclajeId: Long): Reciclaje?
+
+    fun createPuntos(puntos: Puntos): Long
+    fun getAllPuntos(): List<Puntos>
+    fun getPuntosById(puntosId: Long): Puntos?
+    fun updatePuntos(puntos: Puntos): Int
+    fun deletePuntos(id: Long): Int
+
+    fun asignarPuntos(puntos: Puntos): Int
+
+    fun createRecompensa(recompensa: Recompensas): Long
+
+    fun getAllRecompensas(): List<Recompensas>
+    fun getRecompensaById(recompensaId: Long): Recompensas?
+    fun updateRecompensa(recompensa: Recompensas): Int
+    fun deleteRecompensa(id: Long): Int
+
+    fun getReportes(fecha: LocalDate, periodicidad: Periodicidad): ReporteFiltrado
+
+}
+class dbConnection(context: Context, private val testDatabase: SQLiteDatabase? = null) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(DATABASE_CREATE)
@@ -483,6 +526,28 @@ class dbConnection(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         db.close()
         return reciclajes
     }
+
+    fun getReciclajeById(reciclajeId: Long): Reciclaje? {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM reciclaje WHERE id = ?", arrayOf(reciclajeId.toString()))
+        var reciclaje: Reciclaje? = null
+
+        if (cursor.moveToFirst()) {
+            val id = cursor.getLong(cursor.getColumnIndexOrThrow("id"))
+            val materialStr = cursor.getString(cursor.getColumnIndexOrThrow("material"))
+            val material = TipoMaterial.valueOf(materialStr)
+            val peso = cursor.getDouble(cursor.getColumnIndexOrThrow("peso"))
+            val fecha = LocalDate.parse(cursor.getString(cursor.getColumnIndexOrThrow("fecha")))
+
+            reciclaje = Reciclaje(id, material, peso, fecha)
+        }
+
+        cursor.close()
+        db.close()
+
+        return reciclaje
+    }
+
 
     fun updateReciclaje(reciclaje: Reciclaje): Int {
         val db = this.writableDatabase

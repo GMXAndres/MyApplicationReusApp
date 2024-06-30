@@ -33,7 +33,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+
 }
+
+
 
 dependencies {
 
@@ -43,8 +47,15 @@ dependencies {
     implementation(libs.core.splashscreen)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.places)
     testImplementation(libs.junit)
     testImplementation("org.testng:testng:6.9.6")
+    testImplementation("androidx.test:core:1.4.0")
+    testImplementation("org.mockito:mockito-core:3.11.2")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
 }
+
+
+

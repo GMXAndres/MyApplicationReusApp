@@ -15,6 +15,7 @@ class PuntosTest {
     @Test
     fun testAsignarYRestarPuntos() {
         val usuario = Usuario(
+            id = 1,
             nombre = "John",
             apellido = "Doe",
             "1234567890",
@@ -22,9 +23,9 @@ class PuntosTest {
             LocalDate.of(1990, 1, 1),
         )
 
-        val reciclaje1 = Reciclaje(TipoMaterial.VERDE, 15.0, LocalDate.now(), null)
-        val reciclaje2 = Reciclaje(TipoMaterial.AZUL, 5.0, LocalDate.now(), null)
-        val reciclaje3 = Reciclaje(TipoMaterial.ROJO, 5.0, LocalDate.now(), null)
+        val reciclaje1 = Reciclaje(1,TipoMaterial.VERDE, 15.0, LocalDate.now(), null)
+        val reciclaje2 = Reciclaje(2,TipoMaterial.AZUL, 5.0, LocalDate.now(), null)
+        val reciclaje3 = Reciclaje(3,TipoMaterial.ROJO, 5.0, LocalDate.now(), null)
 
         var usuarios = mutableListOf(usuario)
 
@@ -37,28 +38,34 @@ class PuntosTest {
         usuario.reciclajes = reciclajes.toMutableList()
 
         val puntos1 = Puntos(
+            id = 1,
             cantidad = 0, // Asigna el valor necesario para cantidad
             usuario = usuario,
         )
 
         val recompensa1 = Recompensas(
+            id = 1,
             nombre = "Recompensa 1",
             descripcion = "Descripción de la recompensa 1",
             minPuntos = 200
         )
 
         val recompensa2 = Recompensas(
+            id = 2,
             nombre = "Recompensa 2",
             descripcion = "Descripción de la recompensa 2",
             minPuntos = 501
         )
 
         val puntosRecompensas1 = PuntosRecompensas(
+            id = 1,
             punto = puntos1,
             recompensa = recompensa1,
         )
 
+
         val puntosRecompensas2 = PuntosRecompensas(
+            id = 2,
             punto = puntos1,
             recompensa = recompensa2,
         )
@@ -73,6 +80,7 @@ class PuntosTest {
         }
 
         val usuario2 = Usuario(
+            id = 2,
             nombre = "ANDRES",
             apellido = "MEJIA",
             "1006016709",
@@ -80,9 +88,9 @@ class PuntosTest {
             LocalDate.of(2002, 3, 5),
         )
 
-        val reciclaje21 = Reciclaje(TipoMaterial.VERDE, 15.0, LocalDate.now(),null)
-        val reciclaje22 = Reciclaje(TipoMaterial.AZUL, 5.0, LocalDate.now(), null)
-        val reciclaje23 = Reciclaje(TipoMaterial.ROJO, 1.0, LocalDate.now(), null)
+        val reciclaje21 = Reciclaje(4,TipoMaterial.VERDE, 15.0, LocalDate.now(),null)
+        val reciclaje22 = Reciclaje(5,TipoMaterial.AZUL, 5.0, LocalDate.now(), null)
+        val reciclaje23 = Reciclaje(6,TipoMaterial.ROJO, 1.0, LocalDate.now(), null)
         
         usuarios.add(usuario2)
 
@@ -95,16 +103,19 @@ class PuntosTest {
         usuario2.reciclajes = reciclajes2.toMutableList()
 
         val puntos2 = Puntos(
+            id = 2,
             cantidad = 0, // Asigna el valor necesario para cantidad
             usuario = usuario2,
         )
 
         val puntosRecompensas3 =PuntosRecompensas(
+            id = 3,
             punto = puntos2,
             recompensa = recompensa1,
         )
 
         val puntosRecompensas4 =PuntosRecompensas(
+            id = 4,
             punto = puntos2,
             recompensa = recompensa2,
         )
